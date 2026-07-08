@@ -1,7 +1,7 @@
 const ASSETS = {
   catOrange: "./assets/ip/pixel-cat-orange.png",
   catSprout: "./assets/ip/pixel-cat-sprout.png",
-  dogSleep: "./assets/ip/pixel-dog-sleep.png",
+  sleepHome: "./assets/ip/pixel-cat-sleep-home-cropped.png",
 };
 
 const worldGeneratedAssets = {
@@ -522,7 +522,7 @@ function renderHome() {
         </div>
         <div class="sleep-pet">
           <div class="mattress"></div>
-          <img src="${ASSETS.dogSleep}" alt="\u7761\u5728\u8f6f\u57ab\u4e0a\u7684\u50cf\u7d20\u5ba0\u7269" />
+          <img src="${ASSETS.sleepHome}" alt="\u7761\u5728\u8f6f\u57ab\u4e0a\u7684\u50cf\u7d20\u5ba0\u7269" />
         </div>
       </section>
       <svg class="home-curve" viewBox="0 0 1010 150" aria-hidden="true">
@@ -1085,7 +1085,6 @@ function syncScale() {
 
 window.addEventListener("resize", syncScale);
 renderShell();
-
 
 
 
