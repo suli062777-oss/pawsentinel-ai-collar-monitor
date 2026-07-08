@@ -7,6 +7,13 @@ It combines smart-collar telemetry, a backend state engine, a desktop companion 
 
 > 当前仓库以软件 MVP 为主，用模拟项圈数据验证“硬件采集 -> 后端理解 -> 软件展示 -> 互动反馈”的完整链路。早期文档中出现的 PawRoom 或 PawGuard 均指向同一产品方向，最终公开名称统一为 **PawSentinel**。
 
+## Product Demo / 产品演示视频
+
+[![Watch the PawSentinel product demo](docs/assets/showcase/desktop-companion-macos.png)](docs/assets/demo/pawsentinel-product-demo.mp4)
+
+Click the image above to open the product demo video.
+点击上方图片可查看 PawSentinel 产品演示视频。
+
 ## 中文项目介绍
 
 PawSentinel 面向需要远程看护宠物的上班族和学生。传统宠物监控通常依赖摄像头和冷冰冰的数据图表，用户虽然能“看到”宠物，却很难快速理解宠物是否安全、是否异常、今天在家经历了什么。

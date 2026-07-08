@@ -12,6 +12,7 @@ This folder contains the public-facing product, technical, design, research, and
 4. Review the frontend experience: `pawroom-web-prototype-ia-ux-flow-v0.1.md` and `pawroom-design-system-v0.1.md`
 5. Check market validation: `pawroom-competitor-analysis.md` and `pawroom-user-evidence-report.md`
 6. Use `assets/showcase/` for GitHub README and project presentation visuals.
+7. Use `assets/demo/pawsentinel-product-demo.mp4` for the product demo video.
 
 ## Product Strategy / 产品方案
 
@@ -51,6 +52,7 @@ This folder contains the public-facing product, technical, design, research, and
 ## Demo And Media / 展示素材
 
 - `assets/showcase/`: selected public showcase images for GitHub and presentations
+- `assets/demo/`: product demo video assets
 - `assets/frontend-screenshots-v0.14/`: latest frontend screenshot set
 - `pawroom-30s-concept-ad-script-prompts-v0.1.md`: 30-second concept ad script and prompts
 - `pawroom-main-framework-image-to-frontend-map-v0.1.md`: image-to-frontend mapping notes

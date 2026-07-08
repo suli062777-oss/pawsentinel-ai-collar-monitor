@@ -56,6 +56,14 @@ Use:
 docs/assets/showcase/desktop-companion-real-device.png
 ```
 
+## Suggested Product Demo
+
+Use:
+
+```text
+docs/assets/demo/pawsentinel-product-demo.mp4
+```
+
 ## Naming Rules
 
 - Final public name: `PawSentinel`
