@@ -1,0 +1,549 @@
+{
+  "version": "v0.1",
+  "date": "2026-07-07",
+  "timezone": "Asia/Shanghai",
+  "defaultPet": {
+    "petId": "pet_coco_demo",
+    "name": "花花 Coco",
+    "type": "dog",
+    "breed": "柴犬混血",
+    "avatarStyle": "soft_3d_sticker"
+  },
+  "defaultDevice": {
+    "deviceId": "collar_demo_001",
+    "name": "PawCollar Demo 01",
+    "dataSource": "mock_collar",
+    "syncIntervalSeconds": 30
+  },
+  "zones": [
+    {
+      "zoneId": "bed",
+      "label": "宠物窝",
+      "safetyType": "safe"
+    },
+    {
+      "zoneId": "sofa",
+      "label": "沙发",
+      "safetyType": "safe"
+    },
+    {
+      "zoneId": "bowl",
+      "label": "饭盆",
+      "safetyType": "safe"
+    },
+    {
+      "zoneId": "window",
+      "label": "窗边",
+      "safetyType": "safe"
+    },
+    {
+      "zoneId": "toy_area",
+      "label": "玩具区",
+      "safetyType": "safe"
+    },
+    {
+      "zoneId": "door",
+      "label": "门口",
+      "safetyType": "watch"
+    }
+  ],
+  "scenarios": [
+    {
+      "scenarioId": "quiet_day",
+      "name": "安静日",
+      "purpose": "证明低干扰陪伴和基础安全看护。",
+      "recommendedPlaybackSeconds": 24,
+      "samples": [
+        {
+          "sampleId": "quiet_001",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T09:05:00+08:00",
+          "zoneId": "bed",
+          "activityLevel": "low",
+          "motionHint": "still",
+          "heartRateTrend": "normal",
+          "respirationTrend": "normal",
+          "restingDurationTrend": "normal",
+          "battery": 82,
+          "confidence": 0.78,
+          "expectedState": {
+            "stateKey": "sleeping",
+            "safetyLevel": "safe",
+            "animationKey": "sleep_idle",
+            "bubbleText": "花花正在宠物窝休息。",
+            "source": "rule"
+          }
+        },
+        {
+          "sampleId": "quiet_002",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T09:22:00+08:00",
+          "zoneId": "sofa",
+          "activityLevel": "low",
+          "motionHint": "walking",
+          "heartRateTrend": "normal",
+          "respirationTrend": "normal",
+          "restingDurationTrend": "normal",
+          "battery": 81,
+          "confidence": 0.73,
+          "expectedState": {
+            "stateKey": "resting",
+            "safetyLevel": "safe",
+            "animationKey": "walk_slow",
+            "bubbleText": "花花慢慢走到沙发附近。",
+            "source": "rule"
+          }
+        },
+        {
+          "sampleId": "quiet_003",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T09:40:00+08:00",
+          "zoneId": "sofa",
+          "activityLevel": "low",
+          "motionHint": "still",
+          "heartRateTrend": "normal",
+          "respirationTrend": "normal",
+          "restingDurationTrend": "normal",
+          "battery": 80,
+          "confidence": 0.76,
+          "expectedState": {
+            "stateKey": "resting",
+            "safetyLevel": "safe",
+            "animationKey": "rest_on_sofa",
+            "bubbleText": "沙发休息时间，状态稳定。",
+            "source": "rule"
+          }
+        },
+        {
+          "sampleId": "quiet_004",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T10:10:00+08:00",
+          "zoneId": "window",
+          "activityLevel": "medium",
+          "motionHint": "walking",
+          "heartRateTrend": "normal",
+          "respirationTrend": "normal",
+          "restingDurationTrend": "normal",
+          "battery": 79,
+          "confidence": 0.72,
+          "expectedState": {
+            "stateKey": "walking",
+            "safetyLevel": "safe",
+            "animationKey": "look_window",
+            "bubbleText": "花花去了窗边，好像在观察外面。",
+            "source": "rule"
+          }
+        },
+        {
+          "sampleId": "quiet_005",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T10:42:00+08:00",
+          "zoneId": "bed",
+          "activityLevel": "low",
+          "motionHint": "still",
+          "heartRateTrend": "normal",
+          "respirationTrend": "normal",
+          "restingDurationTrend": "normal",
+          "battery": 78,
+          "confidence": 0.79,
+          "expectedState": {
+            "stateKey": "sleeping",
+            "safetyLevel": "safe",
+            "animationKey": "sleep_idle",
+            "bubbleText": "一切正常，花花又回到宠物窝休息。",
+            "source": "rule"
+          }
+        }
+      ]
+    },
+    {
+      "scenarioId": "active_day",
+      "name": "活跃日",
+      "purpose": "证明桌面小世界动效、互动和趣味表达。",
+      "recommendedPlaybackSeconds": 28,
+      "samples": [
+        {
+          "sampleId": "active_001",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T09:10:00+08:00",
+          "zoneId": "toy_area",
+          "activityLevel": "high",
+          "motionHint": "running",
+          "heartRateTrend": "normal",
+          "respirationTrend": "normal",
+          "restingDurationTrend": "short",
+          "battery": 76,
+          "confidence": 0.75,
+          "expectedState": {
+            "stateKey": "playing",
+            "safetyLevel": "safe",
+            "animationKey": "toy_chase",
+            "bubbleText": "花花在玩具区活动得很开心。",
+            "source": "rule"
+          }
+        },
+        {
+          "sampleId": "active_002",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T09:26:00+08:00",
+          "zoneId": "bowl",
+          "activityLevel": "medium",
+          "motionHint": "walking",
+          "heartRateTrend": "normal",
+          "respirationTrend": "normal",
+          "restingDurationTrend": "normal",
+          "battery": 75,
+          "confidence": 0.71,
+          "expectedState": {
+            "stateKey": "walking",
+            "safetyLevel": "safe",
+            "animationKey": "sniff_bowl",
+            "bubbleText": "花花在饭盆附近转了一圈。",
+            "source": "rule"
+          }
+        },
+        {
+          "sampleId": "active_003",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T09:45:00+08:00",
+          "zoneId": "toy_area",
+          "activityLevel": "high",
+          "motionHint": "running",
+          "heartRateTrend": "normal",
+          "respirationTrend": "normal",
+          "restingDurationTrend": "short",
+          "battery": 74,
+          "confidence": 0.77,
+          "expectedState": {
+            "stateKey": "playing",
+            "safetyLevel": "safe",
+            "animationKey": "toy_chase",
+            "bubbleText": "玩具区又被花花占领了。",
+            "source": "rule"
+          }
+        },
+        {
+          "sampleId": "active_004",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T10:12:00+08:00",
+          "zoneId": "sofa",
+          "activityLevel": "medium",
+          "motionHint": "walking",
+          "heartRateTrend": "normal",
+          "respirationTrend": "normal",
+          "restingDurationTrend": "normal",
+          "battery": 73,
+          "confidence": 0.7,
+          "expectedState": {
+            "stateKey": "walking",
+            "safetyLevel": "safe",
+            "animationKey": "walk_slow",
+            "bubbleText": "花花从玩具区慢慢回到沙发附近。",
+            "source": "rule"
+          }
+        },
+        {
+          "sampleId": "active_005",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T10:42:00+08:00",
+          "zoneId": "sofa",
+          "activityLevel": "low",
+          "motionHint": "still",
+          "heartRateTrend": "normal",
+          "respirationTrend": "normal",
+          "restingDurationTrend": "normal",
+          "battery": 72,
+          "confidence": 0.74,
+          "expectedState": {
+            "stateKey": "resting",
+            "safetyLevel": "safe",
+            "animationKey": "rest_on_sofa",
+            "bubbleText": "玩累了，现在在沙发附近休息。",
+            "source": "rule"
+          }
+        }
+      ]
+    },
+    {
+      "scenarioId": "waiting_day",
+      "name": "等主人日",
+      "purpose": "证明门口停留、低焦虑提醒和情绪价值。",
+      "recommendedPlaybackSeconds": 30,
+      "samples": [
+        {
+          "sampleId": "waiting_001",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T15:05:00+08:00",
+          "zoneId": "sofa",
+          "activityLevel": "low",
+          "motionHint": "still",
+          "heartRateTrend": "normal",
+          "respirationTrend": "normal",
+          "restingDurationTrend": "normal",
+          "battery": 61,
+          "confidence": 0.76,
+          "expectedState": {
+            "stateKey": "resting",
+            "safetyLevel": "safe",
+            "animationKey": "rest_on_sofa",
+            "bubbleText": "花花在沙发附近休息。",
+            "source": "rule"
+          }
+        },
+        {
+          "sampleId": "waiting_002",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T15:20:00+08:00",
+          "zoneId": "door",
+          "activityLevel": "medium",
+          "motionHint": "walking",
+          "heartRateTrend": "normal",
+          "respirationTrend": "normal",
+          "restingDurationTrend": "normal",
+          "battery": 60,
+          "confidence": 0.69,
+          "expectedState": {
+            "stateKey": "waiting",
+            "safetyLevel": "watch",
+            "animationKey": "pace_near_door",
+            "bubbleText": "花花到了门口附近。",
+            "source": "rule"
+          }
+        },
+        {
+          "sampleId": "waiting_003",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T15:32:00+08:00",
+          "zoneId": "door",
+          "activityLevel": "medium",
+          "motionHint": "pacing",
+          "heartRateTrend": "normal",
+          "respirationTrend": "normal",
+          "restingDurationTrend": "normal",
+          "battery": 59,
+          "confidence": 0.72,
+          "expectedState": {
+            "stateKey": "waiting",
+            "safetyLevel": "watch",
+            "animationKey": "pace_near_door",
+            "bubbleText": "门口停留时间略长，可以稍后看一眼。",
+            "source": "rule"
+          }
+        },
+        {
+          "sampleId": "waiting_004",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T15:48:00+08:00",
+          "zoneId": "door",
+          "activityLevel": "low",
+          "motionHint": "still",
+          "heartRateTrend": "normal",
+          "respirationTrend": "normal",
+          "restingDurationTrend": "normal",
+          "battery": 58,
+          "confidence": 0.7,
+          "expectedState": {
+            "stateKey": "waiting",
+            "safetyLevel": "watch",
+            "animationKey": "sit_near_door",
+            "bubbleText": "花花还在门口附近，像是在等你回家。",
+            "source": "rule"
+          }
+        },
+        {
+          "sampleId": "waiting_005",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T16:05:00+08:00",
+          "zoneId": "bed",
+          "activityLevel": "low",
+          "motionHint": "walking",
+          "heartRateTrend": "normal",
+          "respirationTrend": "normal",
+          "restingDurationTrend": "normal",
+          "battery": 57,
+          "confidence": 0.73,
+          "expectedState": {
+            "stateKey": "resting",
+            "safetyLevel": "safe",
+            "animationKey": "walk_slow",
+            "bubbleText": "花花离开门口，回到宠物窝附近。",
+            "source": "rule"
+          }
+        }
+      ]
+    },
+    {
+      "scenarioId": "attention_day",
+      "name": "需关注日",
+      "purpose": "证明安全看护、趋势提醒和非医疗边界。",
+      "recommendedPlaybackSeconds": 32,
+      "samples": [
+        {
+          "sampleId": "attention_001",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T13:05:00+08:00",
+          "zoneId": "bed",
+          "activityLevel": "low",
+          "motionHint": "still",
+          "heartRateTrend": "normal",
+          "respirationTrend": "normal",
+          "restingDurationTrend": "normal",
+          "battery": 38,
+          "confidence": 0.77,
+          "expectedState": {
+            "stateKey": "sleeping",
+            "safetyLevel": "safe",
+            "animationKey": "sleep_idle",
+            "bubbleText": "花花正在宠物窝休息。",
+            "source": "rule"
+          }
+        },
+        {
+          "sampleId": "attention_002",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T13:35:00+08:00",
+          "zoneId": "bed",
+          "activityLevel": "low",
+          "motionHint": "still",
+          "heartRateTrend": "normal",
+          "respirationTrend": "normal",
+          "restingDurationTrend": "long",
+          "battery": 34,
+          "confidence": 0.74,
+          "expectedState": {
+            "stateKey": "resting",
+            "safetyLevel": "watch",
+            "animationKey": "long_rest_idle",
+            "bubbleText": "花花休息时间较长，建议稍后再观察。",
+            "source": "rule"
+          }
+        },
+        {
+          "sampleId": "attention_003",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T14:05:00+08:00",
+          "zoneId": "bed",
+          "activityLevel": "low",
+          "motionHint": "still",
+          "heartRateTrend": "slightly_high",
+          "respirationTrend": "normal",
+          "restingDurationTrend": "long",
+          "battery": 30,
+          "confidence": 0.69,
+          "expectedState": {
+            "stateKey": "needs_attention",
+            "safetyLevel": "watch",
+            "animationKey": "attention_idle",
+            "bubbleText": "生命状态趋势略有波动，仅作看护参考。",
+            "source": "rule",
+            "disclaimer": "如宠物持续异常或明显不适，请及时联系兽医。"
+          }
+        },
+        {
+          "sampleId": "attention_004",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T14:25:00+08:00",
+          "zoneId": "door",
+          "activityLevel": "medium",
+          "motionHint": "pacing",
+          "heartRateTrend": "slightly_high",
+          "respirationTrend": "slightly_high",
+          "restingDurationTrend": "normal",
+          "battery": 21,
+          "confidence": 0.66,
+          "expectedState": {
+            "stateKey": "needs_attention",
+            "safetyLevel": "watch",
+            "animationKey": "attention_pace",
+            "bubbleText": "门口活动和趋势同时有波动，建议打开详情看一下。",
+            "source": "rule",
+            "disclaimer": "趋势提醒不构成医疗诊断。"
+          }
+        },
+        {
+          "sampleId": "attention_005",
+          "deviceId": "collar_demo_001",
+          "petId": "pet_coco_demo",
+          "timestamp": "2026-07-07T14:42:00+08:00",
+          "zoneId": "sofa",
+          "activityLevel": "low",
+          "motionHint": "walking",
+          "heartRateTrend": "normal",
+          "respirationTrend": "normal",
+          "restingDurationTrend": "normal",
+          "battery": 14,
+          "confidence": 0.72,
+          "expectedState": {
+            "stateKey": "resting",
+            "safetyLevel": "attention",
+            "animationKey": "low_battery_idle",
+            "bubbleText": "项圈电量低于 15%，记得充电。",
+            "source": "rule"
+          }
+        }
+      ]
+    }
+  ],
+  "creationExamples": [
+    {
+      "type": "sticker_pack",
+      "label": "表情包",
+      "creditCost": 20,
+      "trigger": "选择宠物照片或当前动作",
+      "mvpResult": "返回 4 张占位表情图和文案"
+    },
+    {
+      "type": "comic_card",
+      "label": "漫画卡",
+      "creditCost": 35,
+      "trigger": "选择 1-3 个时间线事件",
+      "mvpResult": "返回四格漫画结构和占位图"
+    },
+    {
+      "type": "memory_card",
+      "label": "回忆卡",
+      "creditCost": 25,
+      "trigger": "选择一段今日历程",
+      "mvpResult": "返回一张可分享回忆卡"
+    },
+    {
+      "type": "role_card",
+      "label": "角色卡",
+      "creditCost": 15,
+      "trigger": "选择宠物档案",
+      "mvpResult": "返回宠物角色设定卡"
+    },
+    {
+      "type": "short_clip",
+      "label": "短动画",
+      "creditCost": 60,
+      "trigger": "选择路径片段",
+      "mvpResult": "返回短动画脚本和占位视频"
+    }
+  ],
+  "disclaimers": [
+    "生命状态仅作趋势参考，不构成医疗诊断。",
+    "如宠物持续异常或明显不适，请及时联系兽医。",
+    "AI 演绎内容来自项圈数据和用户补充，不等同于真实行为录像。"
+  ]
+}
+

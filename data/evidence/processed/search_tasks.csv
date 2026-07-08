@@ -1,0 +1,7 @@
+﻿task_id,platform,query,url,method,notes
+ST-001,Reddit,dog home alone pet camera anxiety,https://www.reddit.com/search/?q=dog%20home%20alone%20pet%20camera%20anxiety,PRAW 或浏览器导出,关注上班、离家、看护焦虑
+ST-002,Reddit,smart dog collar battery GPS complaints,https://www.reddit.com/search/?q=smart%20dog%20collar%20battery%20GPS%20complaints,PRAW 或浏览器导出,关注定位不准、续航、订阅
+ST-003,Reddit,senior dog monitoring health tracker collar,https://www.reddit.com/search/?q=senior%20dog%20monitoring%20health%20tracker%20collar,PRAW 或浏览器导出,关注老年宠和健康趋势
+ST-004,小红书,宠物独自在家 上班想狗 宠物摄像头,https://www.xiaohongshu.com/search_result?keyword=%E5%AE%A0%E7%89%A9%E7%8B%AC%E8%87%AA%E5%9C%A8%E5%AE%B6%20%E4%B8%8A%E7%8F%AD%E6%83%B3%E7%8B%97%20%E5%AE%A0%E7%89%A9%E6%91%84%E5%83%8F%E5%A4%B4,Thunderbit 半自动导出,不绕过登录和验证码
+ST-005,抖音,宠物摄像头 差评 宠物独自在家,https://www.douyin.com/search/%E5%AE%A0%E7%89%A9%E6%91%84%E5%83%8F%E5%A4%B4%20%E5%B7%AE%E8%AF%84%20%E5%AE%A0%E7%89%A9%E7%8B%AC%E8%87%AA%E5%9C%A8%E5%AE%B6,Thunderbit/手动导出,仅采集公开可见评论摘要
+ST-006,淘宝,宠物定位器 宠物摄像头 智能项圈 差评,https://www.taobao.com/,手动/Thunderbit 导出评论 CSV,重点采集差评、追评、问大家

@@ -1,0 +1,236 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1920" viewBox="0 0 1440 1920">
+  <defs>
+    <style>
+      .bg { fill: #fbfcfd; }
+      .title { fill: #111827; font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif; font-weight: 700; }
+      .subtitle { fill: #2f3a45; font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif; font-weight: 500; }
+      .muted { fill: #607282; font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif; font-size: 20px; }
+      .module { fill: #ffffff; stroke: #2d8fbd; stroke-width: 4; }
+      .moduleText { fill: #1f2933; font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif; font-size: 27px; font-weight: 700; }
+      .center { fill: #ffffff; stroke: #2d8fbd; stroke-width: 5; }
+      .centerText { fill: #1f2933; font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif; font-size: 31px; font-weight: 800; }
+      .trunk { fill: none; stroke: #258bbb; stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; }
+      .branch { fill: none; stroke: #2f91bc; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+      .thin { fill: none; stroke: #2f91bc; stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; }
+      .label { fill: #344754; font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif; font-size: 22px; }
+      .small { fill: #4d6573; font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif; font-size: 19px; }
+      .group { fill: #223846; font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif; font-size: 21px; font-weight: 700; }
+      .path { fill: none; stroke: #e2574c; stroke-width: 3.3; stroke-linecap: round; stroke-dasharray: 3 9; }
+      .pathLabel { fill: #c84439; font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif; font-size: 20px; font-weight: 700; }
+      .pathBg { fill: #fff8f6; stroke: #f3b5ad; stroke-width: 1.5; }
+      .dot { fill: #e2574c; }
+      .num { fill: #2f91bc; font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif; font-size: 16px; font-weight: 700; }
+    </style>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#e2574c"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1440" height="1920"/>
+
+  <!-- Header -->
+  <g transform="translate(78 70)">
+    <rect x="0" y="0" width="148" height="148" rx="18" fill="#0f1115"/>
+    <rect x="38" y="34" width="72" height="28" rx="2" fill="#ff6a2a"/>
+    <rect x="62" y="68" width="30" height="52" rx="2" fill="#ffffff"/>
+    <text class="title" x="178" y="54" font-size="34">PawRoom</text>
+    <text class="title" x="178" y="104" font-size="48">Web 原型 UX 设计</text>
+  </g>
+  <text class="subtitle" x="1000" y="118" font-size="30">信息架构</text>
+  <text class="title" x="924" y="172" font-size="45">用户看护闭环</text>
+
+  <!-- Main trunks -->
+  <path class="trunk" d="M 720 930 C 642 820 606 542 530 390"/>
+  <path class="trunk" d="M 720 930 C 607 900 565 852 493 820"/>
+  <path class="trunk" d="M 720 930 C 615 1042 600 1252 532 1400"/>
+  <path class="trunk" d="M 720 930 C 805 815 828 542 910 390"/>
+  <path class="trunk" d="M 720 930 C 812 906 840 858 922 830"/>
+  <path class="trunk" d="M 720 930 C 802 1068 830 1255 910 1390"/>
+
+  <!-- Center -->
+  <rect class="center" x="570" y="888" width="300" height="84" rx="12"/>
+  <text class="centerText" x="720" y="940" text-anchor="middle">PawRoom Web 原型</text>
+
+  <!-- Module nodes -->
+  <rect class="module" x="438" y="350" width="172" height="72" rx="10"/>
+  <text class="moduleText" x="524" y="395" text-anchor="middle">宠物创建</text>
+
+  <rect class="module" x="398" y="784" width="190" height="72" rx="10"/>
+  <text class="moduleText" x="493" y="829" text-anchor="middle">项圈与数据</text>
+
+  <rect class="module" x="438" y="1364" width="172" height="72" rx="10"/>
+  <text class="moduleText" x="524" y="1409" text-anchor="middle">我的与设置</text>
+
+  <rect class="module" x="866" y="350" width="172" height="72" rx="10"/>
+  <text class="moduleText" x="952" y="395" text-anchor="middle">看护首页</text>
+
+  <rect class="module" x="864" y="794" width="214" height="72" rx="10"/>
+  <text class="moduleText" x="971" y="839" text-anchor="middle">桌面小世界</text>
+
+  <rect class="module" x="852" y="1354" width="244" height="72" rx="10"/>
+  <text class="moduleText" x="974" y="1399" text-anchor="middle">今日回放与创作</text>
+
+  <!-- Left tree: pet creation -->
+  <path class="branch" d="M 438 386 H 350 V 300 M 350 300 V 500"/>
+  <g text-anchor="end">
+    <path class="thin" d="M 350 308 H 228"/><text class="label" x="214" y="315">选择示例宠物</text>
+    <path class="thin" d="M 350 346 H 228"/><text class="label" x="214" y="353">上传宠物照片</text>
+    <path class="thin" d="M 350 384 H 228"/><text class="label" x="214" y="391">填写基础信息</text>
+    <path class="thin" d="M 350 422 H 228"/><text class="label" x="214" y="429">选择视觉风格</text>
+    <path class="thin" d="M 350 460 H 228"/><text class="label" x="214" y="467">生成宠物分身</text>
+    <path class="thin" d="M 350 498 H 228"/><text class="label" x="214" y="505">进入项圈连接</text>
+  </g>
+
+  <!-- Left tree: collar data -->
+  <path class="branch" d="M 398 820 H 350 V 612 M 350 612 V 1168"/>
+  <g>
+    <text class="group" x="368" y="640">设备状态</text>
+    <path class="thin" d="M 350 632 H 258 V 592 M 258 592 V 672"/>
+    <g text-anchor="end">
+      <path class="thin" d="M 258 596 H 154"/><text class="small" x="140" y="603">连接状态</text>
+      <path class="thin" d="M 258 632 H 154"/><text class="small" x="140" y="639">电量</text>
+      <path class="thin" d="M 258 668 H 154"/><text class="small" x="140" y="675">更新时间</text>
+    </g>
+
+    <text class="group" x="368" y="770">活动状态</text>
+    <path class="thin" d="M 350 762 H 258 V 708 M 258 708 V 816"/>
+    <g text-anchor="end">
+      <path class="thin" d="M 258 712 H 154"/><text class="small" x="140" y="719">静止</text>
+      <path class="thin" d="M 258 748 H 154"/><text class="small" x="140" y="755">走动</text>
+      <path class="thin" d="M 258 784 H 154"/><text class="small" x="140" y="791">活跃</text>
+      <path class="thin" d="M 258 812 H 154"/><text class="small" x="140" y="819">门口徘徊</text>
+    </g>
+
+    <text class="group" x="368" y="908">家庭区域</text>
+    <path class="thin" d="M 350 900 H 258 V 846 M 258 846 V 970"/>
+    <g text-anchor="end">
+      <path class="thin" d="M 258 850 H 154"/><text class="small" x="140" y="857">宠物窝</text>
+      <path class="thin" d="M 258 880 H 154"/><text class="small" x="140" y="887">沙发</text>
+      <path class="thin" d="M 258 910 H 154"/><text class="small" x="140" y="917">门口</text>
+      <path class="thin" d="M 258 940 H 154"/><text class="small" x="140" y="947">饭盆</text>
+      <path class="thin" d="M 258 968 H 154"/><text class="small" x="140" y="975">窗边</text>
+    </g>
+
+    <text class="group" x="368" y="1042">生命状态趋势</text>
+    <path class="thin" d="M 350 1034 H 258 V 998 M 258 998 V 1072"/>
+    <g text-anchor="end">
+      <path class="thin" d="M 258 1002 H 154"/><text class="small" x="140" y="1009">心率趋势</text>
+      <path class="thin" d="M 258 1038 H 154"/><text class="small" x="140" y="1045">呼吸趋势</text>
+      <path class="thin" d="M 258 1068 H 154"/><text class="small" x="140" y="1075">静息时长</text>
+      <path class="thin" d="M 258 1098 H 154"/><text class="small" x="140" y="1105">非诊断提示</text>
+    </g>
+
+    <text class="group" x="368" y="1152">数据边界</text>
+    <path class="thin" d="M 350 1144 H 258 V 1108 M 258 1108 V 1182"/>
+    <g text-anchor="end">
+      <path class="thin" d="M 258 1112 H 154"/><text class="small" x="140" y="1119">项圈记录</text>
+      <path class="thin" d="M 258 1148 H 154"/><text class="small" x="140" y="1155">用户补充</text>
+      <path class="thin" d="M 258 1178 H 154"/><text class="small" x="140" y="1185">AI 演绎</text>
+    </g>
+  </g>
+
+  <!-- Left tree: settings -->
+  <path class="branch" d="M 438 1400 H 350 V 1278 M 350 1278 V 1672"/>
+  <g text-anchor="end">
+    <path class="thin" d="M 350 1284 H 218"/><text class="label" x="204" y="1291">宠物档案</text>
+    <path class="thin" d="M 350 1324 H 218"/><text class="label" x="204" y="1331">安全区域</text>
+    <path class="thin" d="M 350 1364 H 218"/><text class="label" x="204" y="1371">提醒偏好</text>
+  </g>
+  <text class="group" x="212" y="1421" text-anchor="end">AI 创作额度</text>
+  <path class="thin" d="M 350 1414 H 246 V 1452 M 246 1452 V 1530"/>
+  <g text-anchor="end">
+    <path class="thin" d="M 246 1458 H 142"/><text class="small" x="128" y="1465">剩余额度</text>
+    <path class="thin" d="M 246 1492 H 142"/><text class="small" x="128" y="1499">消耗记录</text>
+    <path class="thin" d="M 246 1526 H 142"/><text class="small" x="128" y="1533">加购/会员</text>
+    <path class="thin" d="M 350 1588 H 218"/><text class="label" x="204" y="1595">数据隐私</text>
+    <path class="thin" d="M 350 1648 H 218"/><text class="label" x="204" y="1655">医疗边界说明</text>
+  </g>
+
+  <!-- Right tree: overview -->
+  <path class="branch" d="M 1038 386 H 1100 V 286 M 1100 286 V 590"/>
+  <g>
+    <path class="thin" d="M 1100 292 H 1216"/><text class="label" x="1230" y="299">一句话状态</text>
+    <path class="thin" d="M 1100 332 H 1216"/><text class="label" x="1230" y="339">安全等级</text>
+    <path class="thin" d="M 1100 372 H 1216"/><text class="label" x="1230" y="379">当前区域</text>
+    <path class="thin" d="M 1100 412 H 1216"/><text class="label" x="1230" y="419">今日概览</text>
+    <path class="thin" d="M 1100 452 H 1216"/><text class="label" x="1230" y="459">最近事件</text>
+    <text class="group" x="1120" y="508">异常提醒</text>
+    <path class="thin" d="M 1100 500 H 1216 V 468 M 1216 468 V 548"/>
+    <path class="thin" d="M 1216 472 H 1324"/><text class="small" x="1338" y="479">离开安全区</text>
+    <path class="thin" d="M 1216 510 H 1324"/><text class="small" x="1338" y="517">长时间静止</text>
+    <path class="thin" d="M 1216 544 H 1324"/><text class="small" x="1338" y="551">趋势需关注</text>
+    <text class="group" x="1120" y="584">快捷操作</text>
+    <path class="thin" d="M 1100 576 H 1216 V 594 M 1216 594 V 668"/>
+    <path class="thin" d="M 1216 598 H 1324"/><text class="small" x="1338" y="605">进入小世界</text>
+    <path class="thin" d="M 1216 632 H 1324"/><text class="small" x="1338" y="639">查看建议操作</text>
+    <path class="thin" d="M 1216 664 H 1324"/><text class="small" x="1338" y="671">查看今日回放</text>
+  </g>
+
+  <!-- Right tree: desktop world -->
+  <path class="branch" d="M 1078 830 H 1118 V 718 M 1118 718 V 1168"/>
+  <g>
+    <path class="thin" d="M 1118 724 H 1232"/><text class="label" x="1246" y="731">卡通家庭地图</text>
+    <path class="thin" d="M 1118 764 H 1232"/><text class="label" x="1246" y="771">宠物实时分身</text>
+    <text class="group" x="1138" y="830">状态动效</text>
+    <path class="thin" d="M 1118 822 H 1232 V 790 M 1232 790 V 890"/>
+    <path class="thin" d="M 1232 794 H 1328"/><text class="small" x="1342" y="801">睡觉</text>
+    <path class="thin" d="M 1232 826 H 1328"/><text class="small" x="1342" y="833">巡逻</text>
+    <path class="thin" d="M 1232 858 H 1328"/><text class="small" x="1342" y="865">吃饭</text>
+    <path class="thin" d="M 1232 886 H 1328"/><text class="small" x="1342" y="893">等主人</text>
+    <text class="group" x="1138" y="966">轻互动</text>
+    <path class="thin" d="M 1118 958 H 1232 V 926 M 1232 926 V 1026"/>
+    <path class="thin" d="M 1232 930 H 1328"/><text class="small" x="1342" y="937">摸摸</text>
+    <path class="thin" d="M 1232 962 H 1328"/><text class="small" x="1342" y="969">投喂</text>
+    <path class="thin" d="M 1232 994 H 1328"/><text class="small" x="1342" y="1001">叫名字</text>
+    <path class="thin" d="M 1232 1022 H 1328"/><text class="small" x="1342" y="1029">扔玩具</text>
+    <path class="thin" d="M 1118 1082 H 1232"/><text class="label" x="1246" y="1089">桌面小窗</text>
+    <text class="group" x="1138" y="1152">跨端状态预览</text>
+    <path class="thin" d="M 1118 1144 H 1232 V 1112 M 1232 1112 V 1186"/>
+    <path class="thin" d="M 1232 1116 H 1328"/><text class="small" x="1342" y="1123">锁屏</text>
+    <path class="thin" d="M 1232 1150 H 1328"/><text class="small" x="1342" y="1157">灵动岛</text>
+    <path class="thin" d="M 1232 1182 H 1328"/><text class="small" x="1342" y="1189">通知</text>
+  </g>
+
+  <!-- Right tree: replay and creation -->
+  <path class="branch" d="M 1096 1390 H 1130 V 1270 M 1130 1270 V 1664"/>
+  <g>
+    <path class="thin" d="M 1130 1276 H 1250"/><text class="label" x="1264" y="1283">今日时间轴</text>
+    <path class="thin" d="M 1130 1320 H 1250"/><text class="label" x="1264" y="1327">路径回放</text>
+    <path class="thin" d="M 1130 1364 H 1250"/><text class="label" x="1264" y="1371">用户补充事件</text>
+    <path class="thin" d="M 1130 1408 H 1250"/><text class="label" x="1264" y="1415">AI 小剧场</text>
+    <path class="thin" d="M 1130 1452 H 1250"/><text class="label" x="1264" y="1459">四格漫画</text>
+    <path class="thin" d="M 1130 1496 H 1250"/><text class="label" x="1264" y="1503">表情包</text>
+    <path class="thin" d="M 1130 1540 H 1250"/><text class="label" x="1264" y="1547">角色卡</text>
+    <path class="thin" d="M 1130 1584 H 1250"/><text class="label" x="1264" y="1591">分享导出</text>
+    <path class="thin" d="M 1130 1628 H 1250"/><text class="label" x="1264" y="1635">Credits 消耗提示</text>
+  </g>
+
+  <!-- Dotted user paths -->
+  <path class="path" marker-end="url(#arrow-red)" d="M 610 386 C 690 478 680 650 590 812 C 750 742 855 518 866 386 C 1026 526 1042 678 972 794 C 1055 1030 1044 1210 974 1354"/>
+  <rect class="pathBg" x="645" y="636" width="150" height="36" rx="18"/>
+  <text class="pathLabel" x="720" y="660" text-anchor="middle">高频使用路径</text>
+  <circle class="dot" cx="610" cy="386" r="7"/>
+  <circle class="dot" cx="590" cy="812" r="7"/>
+  <circle class="dot" cx="866" cy="386" r="7"/>
+  <circle class="dot" cx="972" cy="794" r="7"/>
+  <circle class="dot" cx="974" cy="1354" r="7"/>
+
+  <path class="path" marker-end="url(#arrow-red)" d="M 588 820 C 722 815 820 590 866 386 C 1090 522 1105 938 1120 1148 C 942 1230 740 1312 610 1400"/>
+  <rect class="pathBg" x="707" y="1166" width="150" height="36" rx="18"/>
+  <text class="pathLabel" x="782" y="1190" text-anchor="middle">异常提醒路径</text>
+  <circle class="dot" cx="588" cy="820" r="7"/>
+  <circle class="dot" cx="1120" cy="1148" r="7"/>
+  <circle class="dot" cx="610" cy="1400" r="7"/>
+
+  <!-- Small guide labels -->
+  <g>
+    <circle cx="632" cy="386" r="12" fill="#ffffff" stroke="#8fbfd5" stroke-width="2"/><text class="num" x="632" y="392" text-anchor="middle">1</text>
+    <circle cx="610" cy="820" r="12" fill="#ffffff" stroke="#8fbfd5" stroke-width="2"/><text class="num" x="610" y="826" text-anchor="middle">2</text>
+    <circle cx="846" cy="386" r="12" fill="#ffffff" stroke="#8fbfd5" stroke-width="2"/><text class="num" x="846" y="392" text-anchor="middle">3</text>
+    <circle cx="948" cy="794" r="12" fill="#ffffff" stroke="#8fbfd5" stroke-width="2"/><text class="num" x="948" y="800" text-anchor="middle">4</text>
+    <circle cx="950" cy="1354" r="12" fill="#ffffff" stroke="#8fbfd5" stroke-width="2"/><text class="num" x="950" y="1360" text-anchor="middle">5</text>
+  </g>
+
+  <text class="muted" x="720" y="1818" text-anchor="middle">核心逻辑：宠物创建 → 项圈数据 → 安全看护 → 桌面陪伴 → 今日回放创作</text>
+  <text class="muted" x="720" y="1854" text-anchor="middle">跨端提醒与 AI 创作额度均作为辅助能力，不再占用一级入口</text>
+</svg>

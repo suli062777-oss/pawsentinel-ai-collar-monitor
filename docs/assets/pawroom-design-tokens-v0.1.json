@@ -1,0 +1,257 @@
+{
+    "meta":  {
+                 "name":  "PawRoom Design Tokens",
+                 "version":  "0.1",
+                 "date":  "2026-07-07",
+                 "scope":  "web high-fidelity foundation",
+                 "excludes":  [
+                                  "button components",
+                                  "pet IP character design"
+                              ]
+             },
+    "color":  {
+                  "brand":  {
+                                "cream":  "#FEE093",
+                                "surface":  "#FAF8F8",
+                                "orange":  "#F76F23",
+                                "gold":  "#FCD36C",
+                                "apricot":  "#F9A159"
+                            },
+                  "neutral":  {
+                                  "900":  "#2B2521",
+                                  "700":  "#4D4741",
+                                  "500":  "#8D8B73",
+                                  "300":  "#D9D2C8",
+                                  "100":  "#F6F1E8"
+                              },
+                  "status":  {
+                                 "safe":  "#68AB12",
+                                 "warning":  "#F9A159",
+                                 "danger":  "#E2574C",
+                                 "offline":  "#A59E98"
+                             },
+                  "semantic":  {
+                                   "background":  "#F6F1E8",
+                                   "surface":  "#FAF8F8",
+                                   "surfaceGlass":  "rgba(255,255,255,0.68)",
+                                   "primary":  "#F76F23",
+                                   "secondary":  "#FCD36C",
+                                   "creation":  "#F9A159",
+                                   "path":  "#7DA4BD",
+                                   "success":  "#68AB12",
+                                   "danger":  "#E2574C",
+                                   "textPrimary":  "#2B2521",
+                                   "textSecondary":  "#4D4741",
+                                   "textTertiary":  "#8D8B73",
+                                   "border":  "#D9D2C8"
+                               }
+              },
+    "type":  {
+                 "family":  {
+                                "sans":  "-apple-system, BlinkMacSystemFont, \"SF Pro Display\", \"SF Pro Text\", \"PingFang SC\", \"Microsoft YaHei\", \"Noto Sans SC\", sans-serif"
+                            },
+                 "scale":  {
+                               "display":  {
+                                               "fontSize":  32,
+                                               "lineHeight":  40,
+                                               "fontWeight":  700
+                                           },
+                               "titleLg":  {
+                                               "fontSize":  24,
+                                               "lineHeight":  32,
+                                               "fontWeight":  700
+                                           },
+                               "titleMd":  {
+                                               "fontSize":  20,
+                                               "lineHeight":  28,
+                                               "fontWeight":  650
+                                           },
+                               "bodyLg":  {
+                                              "fontSize":  17,
+                                              "lineHeight":  26,
+                                              "fontWeight":  400
+                                          },
+                               "bodyMd":  {
+                                              "fontSize":  15,
+                                              "lineHeight":  24,
+                                              "fontWeight":  400
+                                          },
+                               "bodySm":  {
+                                              "fontSize":  13,
+                                              "lineHeight":  20,
+                                              "fontWeight":  400
+                                          },
+                               "caption":  {
+                                               "fontSize":  12,
+                                               "lineHeight":  18,
+                                               "fontWeight":  400
+                                           }
+                           }
+             },
+    "spacing":  {
+                    "scale":  [
+                                  4,
+                                  8,
+                                  12,
+                                  16,
+                                  20,
+                                  24,
+                                  32,
+                                  40,
+                                  48,
+                                  64
+                              ],
+                    "pagePaddingDesktop":  20,
+                    "cardGap":  16,
+                    "sectionGap":  24,
+                    "panelGap":  12
+                },
+    "radius":  {
+                   "xs":  8,
+                   "sm":  12,
+                   "md":  16,
+                   "lg":  24,
+                   "xl":  32,
+                   "pill":  999
+               },
+    "stroke":  {
+                   "hairline":  1,
+                   "default":  1.5,
+                   "emphasis":  2
+               },
+    "layout":  {
+                   "desktopCanvas":  {
+                                         "width":  1440,
+                                         "height":  1024
+                                     },
+                   "leftTaskbarWidth":  {
+                                            "min":  112,
+                                            "max":  148
+                                        },
+                   "bottomTimelineHeight":  {
+                                                "min":  96,
+                                                "max":  128
+                                            },
+                   "pageLocalHeaderHeight":  {
+                                                 "min":  0,
+                                                 "max":  56
+                                             },
+                   "leftTaskbarZones":  {
+                                            "primaryTasks":  {
+                                                                 "items":  [
+                                                                               "home",
+                                                                               "desktopWorld",
+                                                                               "petData",
+                                                                               "dailyJourney",
+                                                                               "settings"
+                                                                           ],
+                                                                 "itemHeight":  56,
+                                                                 "gap":  12
+                                                             },
+                                            "actionStatus":  {
+                                                                 "items":  [
+                                                                               "addPet",
+                                                                               "battery"
+                                                                           ],
+                                                                 "itemHeight":  48,
+                                                                 "gap":  10
+                                                             },
+                                            "currentObject":  {
+                                                                  "items":  [
+                                                                                "petInfo"
+                                                                            ],
+                                                                  "height":  88
+                                                              }
+                                        },
+                   "hasTopGlobalBar":  false,
+                   "hasRightDrawer":  false,
+                   "mainCanvas":  {
+                                      "width":  "remaining",
+                                      "startsAfter":  "leftTaskbar"
+                                  },
+                   "leftSidebarItems":  [
+                                            {
+                                                "key":  "home",
+                                                "label":  "首页",
+                                                "type":  "page"
+                                            },
+                                            {
+                                                "key":  "desktopWorld",
+                                                "label":  "桌面小世界",
+                                                "type":  "page"
+                                            },
+                                            {
+                                                "key":  "petData",
+                                                "label":  "宠物数据",
+                                                "type":  "page"
+                                            },
+                                            {
+                                                "key":  "dailyJourney",
+                                                "label":  "今日历程",
+                                                "type":  "page"
+                                            },
+                                            {
+                                                "key":  "settings",
+                                                "label":  "设置",
+                                                "type":  "page"
+                                            },
+                                            {
+                                                "key":  "addPet",
+                                                "label":  "新增宠物",
+                                                "type":  "action"
+                                            },
+                                            {
+                                                "key":  "battery",
+                                                "label":  "电量",
+                                                "type":  "status"
+                                            },
+                                            {
+                                                "key":  "petInfo",
+                                                "label":  "宠物信息",
+                                                "type":  "object"
+                                            }
+                                        ]
+               },
+    "glass":  {
+                  "floating":  {
+                                   "background":  "rgba(255,255,255,0.62)",
+                                   "blur":  20,
+                                   "border":  "rgba(255,255,255,0.68)"
+                               },
+                  "solidSurface":  {
+                                       "background":  "#FAF8F8",
+                                       "blur":  0
+                                   },
+                  "taskbar":  {
+                                  "background":  "rgba(255,255,255,0.66)",
+                                  "blur":  24,
+                                  "border":  "rgba(255,255,255,0.72)",
+                                  "role":  "single global left sidebar with 8 entries"
+                              },
+                  "inlinePanel":  {
+                                      "background":  "rgba(255,255,255,0.72)",
+                                      "blur":  20,
+                                      "border":  "rgba(255,255,255,0.74)",
+                                      "role":  "main canvas inline panel"
+                                  }
+              },
+    "motion":  {
+                   "duration":  {
+                                    "micro":  180,
+                                    "standard":  240,
+                                    "page":  360
+                                },
+                   "easing":  {
+                                  "standard":  "cubic-bezier(0.2, 0.8, 0.2, 1)",
+                                  "exit":  "cubic-bezier(0.4, 0, 1, 1)"
+                              },
+                   "reducedMotion":  true
+               },
+    "a11y":  {
+                 "minTextContrast":  4.5,
+                 "minLargeTextContrast":  3,
+                 "minTargetSize":  44,
+                 "colorNotOnly":  true,
+                 "focusVisible":  true
+             }
+}

@@ -1,0 +1,69 @@
+{
+    "name":  "pawroom-backend",
+    "version":  "0.1.0",
+    "private":  true,
+    "description":  "PawRoom MVP backend for mock collar telemetry, pet state snapshots, realtime scene events, and creation credits.",
+    "license":  "UNLICENSED",
+    "scripts":  {
+                    "start":  "nest start",
+                    "start:dev":  "nest start --watch",
+                    "build":  "nest build",
+                    "test":  "jest",
+                    "verify":  "node scripts/verify-mock-data.mjs",
+                    "prisma:generate":  "prisma generate",
+                    "prisma:migrate":  "prisma migrate dev",
+                    "infra:check":  "node scripts/check-infra-readiness.mjs",
+                    "infra:check:strict":  "node scripts/check-infra-readiness.mjs --strict",
+                    "smoke:api":  "node scripts/smoke-api.mjs",
+                    "smoke:api:infra":  "powershell -NoProfile -Command \"$env:PAWROOM_SMOKE_MODE=\u0027infra\u0027; node scripts/smoke-api.mjs\"",
+                    "audit:plan":  "node scripts/audit-plan-completion.mjs",
+                    "smoke:visual":  "node scripts/smoke-visual-studio.mjs"
+                },
+    "dependencies":  {
+                         "@nestjs/common":  "^10.4.15",
+                         "@nestjs/core":  "^10.4.15",
+                         "@nestjs/platform-express":  "^10.4.15",
+                         "@nestjs/platform-socket.io":  "^10.4.15",
+                         "@nestjs/websockets":  "^10.4.15",
+                         "@prisma/client":  "^5.22.0",
+                         "bullmq":  "^5.34.1",
+                         "class-transformer":  "^0.5.1",
+                         "class-validator":  "^0.14.1",
+                         "reflect-metadata":  "^0.2.2",
+                         "rxjs":  "^7.8.1",
+                         "socket.io":  "^4.8.1"
+                     },
+    "devDependencies":  {
+                            "@nestjs/cli":  "^10.4.8",
+                            "@nestjs/schematics":  "^10.2.3",
+                            "@nestjs/testing":  "^10.4.15",
+                            "@types/express":  "^5.0.0",
+                            "@types/jest":  "^29.5.14",
+                            "@types/node":  "^22.10.1",
+                            "jest":  "^29.7.0",
+                            "prisma":  "^5.22.0",
+                            "source-map-support":  "^0.5.21",
+                            "ts-jest":  "^29.2.5",
+                            "ts-loader":  "^9.5.1",
+                            "ts-node":  "^10.9.2",
+                            "tsconfig-paths":  "^4.2.0",
+                            "typescript":  "^5.7.2"
+                        },
+    "jest":  {
+                 "moduleFileExtensions":  [
+                                              "js",
+                                              "json",
+                                              "ts"
+                                          ],
+                 "rootDir":  "src",
+                 "testRegex":  ".*\\.spec\\.ts$",
+                 "transform":  {
+                                   "^.+\\.(t|j)s$":  "ts-jest"
+                               },
+                 "collectCoverageFrom":  [
+                                             "**/*.(t|j)s"
+                                         ],
+                 "coverageDirectory":  "../coverage",
+                 "testEnvironment":  "node"
+             }
+}

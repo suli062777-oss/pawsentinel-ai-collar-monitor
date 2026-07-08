@@ -1,0 +1,52 @@
+# Public package allowlist.
+# Everything is ignored by default, then the repository-facing folders are re-enabled.
+/*
+!/.gitignore
+!/README.md
+!/backend/
+!/frontend/
+!/data/
+!/docs/
+!/scripts/
+
+# Runtime and local infrastructure
+.runtime/
+tmp/
+output/
+.agents/
+.codex/
+*.pid
+*.log
+__pycache__/
+*.pyc
+
+# Node / build outputs
+node_modules/
+backend/node_modules/
+backend/dist/
+backend/coverage/
+frontend/node_modules/
+dist/
+coverage/
+
+# Public evidence package keeps summaries and reports, not raw scraped captures
+data/evidence/raw/
+data/evidence/audit/
+
+# Frontend keeps runnable assets, not source reference dumps
+frontend/assets/reference/main-framework/
+
+# Environment files
+.env
+.env.*
+backend/.env
+frontend/.env
+!.env.example
+!backend/.env.example
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

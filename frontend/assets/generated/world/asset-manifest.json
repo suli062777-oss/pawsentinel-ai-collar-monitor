@@ -1,0 +1,117 @@
+{
+  "version": "0.3",
+  "page": "desktop-world",
+  "canvas": {
+    "width": 1440,
+    "height": 1024
+  },
+  "principle": "Only the pet and scene props should be pixel assets. Interface chrome remains liquid-glass UI.",
+  "assets": [
+    {
+      "slot": "petIdle",
+      "label": "宠物待机形象",
+      "status": "reused",
+      "path": "./assets/ip/pixel-cat-orange.png",
+      "transparentBackground": true,
+      "usage": "桌面小世界主宠物分身"
+    },
+    {
+      "slot": "sceneBackground",
+      "label": "像素客厅背景",
+      "status": "ready",
+      "path": "./assets/generated/world/scene-background-v0.11.png",
+      "transparentBackground": false,
+      "usage": "Connected through .world-scene.has-scene-asset as the desktop-world base pixel room background.",
+      "width": 1487,
+      "height": 1058
+    },
+    {
+      "slot": "bookshelf",
+      "label": "书架",
+      "status": "needs-image2",
+      "path": "",
+      "transparentBackground": true,
+      "usage": "房间左上区域道具"
+    },
+    {
+      "slot": "lamp",
+      "label": "台灯",
+      "status": "needs-image2",
+      "path": "",
+      "transparentBackground": true,
+      "usage": "房间左上氛围道具"
+    },
+    {
+      "slot": "sofa",
+      "label": "沙发",
+      "status": "needs-image2",
+      "path": "",
+      "transparentBackground": true,
+      "usage": "客厅核心家具"
+    },
+    {
+      "slot": "rug",
+      "label": "客厅地毯",
+      "status": "needs-image2",
+      "path": "",
+      "transparentBackground": true,
+      "usage": "安全区视觉中心"
+    },
+    {
+      "slot": "table",
+      "label": "茶几",
+      "status": "needs-image2",
+      "path": "",
+      "transparentBackground": true,
+      "usage": "客厅中部家具"
+    },
+    {
+      "slot": "toy",
+      "label": "玩具区",
+      "status": "needs-image2",
+      "path": "",
+      "transparentBackground": true,
+      "usage": "右上互动区域"
+    },
+    {
+      "slot": "bowl",
+      "label": "饭盆",
+      "status": "needs-image2",
+      "path": "",
+      "transparentBackground": true,
+      "usage": "右下饮食区域"
+    },
+    {
+      "slot": "tv",
+      "label": "电视",
+      "status": "needs-image2",
+      "path": "",
+      "transparentBackground": true,
+      "usage": "右侧墙面家具"
+    },
+    {
+      "slot": "plant",
+      "label": "绿植",
+      "status": "needs-image2",
+      "path": "",
+      "transparentBackground": true,
+      "usage": "房间装饰与层次"
+    },
+    {
+      "slot": "pet-bed",
+      "label": "宠物窝",
+      "status": "needs-image2",
+      "path": "",
+      "transparentBackground": true,
+      "usage": "左下休息区域"
+    },
+    {
+      "slot": "door-mat",
+      "label": "门垫",
+      "status": "needs-image2",
+      "path": "",
+      "transparentBackground": true,
+      "usage": "入口区域"
+    }
+  ]
+}

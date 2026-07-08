@@ -1,0 +1,145 @@
+openapi: 3.0.3
+info:
+  title: PawRoom Backend MVP API
+  version: 0.1.0
+  description: Mock collar telemetry, pet state snapshots, realtime scene events, and one-off memory creation.
+servers:
+  - url: http://localhost:4000
+paths:
+  /health:
+    get:
+      summary: Health check
+      responses:
+        "200":
+          description: Service is healthy.
+  /demo/scenarios:
+    get:
+      summary: List mock collar scenarios.
+      responses:
+        "200":
+          description: Scenario summaries.
+  /demo/sessions:
+    post:
+      summary: Create an anonymous demo session.
+      responses:
+        "201":
+          description: Demo session.
+  /demo/sessions/{sessionId}/playback:
+    post:
+      summary: Play the mock collar scenario bound to a demo session.
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "201":
+          description: Played state snapshots and timeline events.
+  /pets:
+    get:
+      summary: List pets for the demo session.
+      responses:
+        "200":
+          description: Pet list.
+    post:
+      summary: Create a mock pet profile.
+      responses:
+        "201":
+          description: Pet profile.
+  /pets/{petId}/assets:
+    post:
+      summary: Add a mock pet asset.
+      parameters:
+        - name: petId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "201":
+          description: Pet asset.
+  /devices/mock/connect:
+    post:
+      summary: Connect the mock collar.
+      responses:
+        "201":
+          description: Mock collar status.
+  /devices/{deviceId}/telemetry:
+    post:
+      summary: Ingest one collar telemetry sample.
+      parameters:
+        - name: deviceId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "201":
+          description: Derived state snapshot and timeline event.
+  /pets/{petId}/state/latest:
+    get:
+      summary: Get latest derived pet state.
+      parameters:
+        - name: petId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Latest pet state snapshot.
+  /pets/{petId}/timeline:
+    get:
+      summary: Get timeline events for a pet.
+      parameters:
+        - name: petId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Timeline events.
+  /interactions:
+    post:
+      summary: Record a desktop pet interaction.
+      responses:
+        "201":
+          description: Interaction feedback.
+  /creations/estimate:
+    post:
+      summary: Estimate Paw Credits for a one-off memory creation.
+      responses:
+        "201":
+          description: Credit cost estimate.
+  /creations:
+    post:
+      summary: Create a one-off memory creation job.
+      responses:
+        "201":
+          description: Creation job.
+  /creations/{creationId}:
+    get:
+      summary: Get a creation job.
+      parameters:
+        - name: creationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Creation job.
+  /credits/balance:
+    get:
+      summary: Get Paw Credits balance.
+      responses:
+        "200":
+          description: Current credits balance.
+  /settings/notifications:
+    patch:
+      summary: Update notification settings.
+      responses:
+        "200":
+          description: Updated notification settings.

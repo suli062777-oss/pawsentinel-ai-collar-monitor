@@ -1,0 +1,131 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model DemoSession {
+  id         String   @id
+  scenarioId String
+  petId      String
+  deviceId   String
+  credits    Int      @default(100)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Pet {
+  id          String   @id
+  name        String
+  type        String
+  breed       String?
+  avatarStyle String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  assets      PetAsset[]
+}
+
+model PetAsset {
+  id        String   @id
+  petId     String
+  type      String
+  url       String
+  source    String
+  createdAt DateTime @default(now())
+  pet       Pet      @relation(fields: [petId], references: [id])
+}
+
+model CollarDevice {
+  id          String   @id
+  petId       String
+  name        String
+  dataSource  String
+  battery     Int
+  connected   Boolean  @default(false)
+  lastSeenAt  DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model TelemetrySample {
+  id                    String   @id
+  deviceId              String
+  petId                 String
+  timestamp             DateTime
+  zoneId                String
+  activityLevel         String
+  motionHint            String?
+  heartRateTrend        String?
+  respirationTrend      String?
+  restingDurationTrend  String?
+  battery               Int
+  confidence            Float
+  createdAt             DateTime @default(now())
+}
+
+model PetStateSnapshot {
+  id           String   @id
+  petId        String
+  deviceId     String
+  sampleId     String?
+  timestamp    DateTime
+  stateKey     String
+  safetyLevel  String
+  zoneId       String
+  animationKey String
+  bubbleText   String
+  source       String
+  confidence   Float
+  disclaimer   String?
+  createdAt    DateTime @default(now())
+}
+
+model TimelineEvent {
+  id             String   @id
+  petId          String
+  timestamp      DateTime
+  title          String
+  description    String
+  zoneId         String?
+  source         String
+  severity       String
+  linkedSampleId String?
+  createdAt      DateTime @default(now())
+}
+
+model CreationJob {
+  id             String   @id
+  petId          String
+  type           String
+  inputAssetIds  Json
+  inputEventIds  Json
+  creditCost     Int
+  status         String
+  resultUrls     Json
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model CreditLedgerEntry {
+  id            String   @id
+  sessionId     String
+  petId         String?
+  reason        String
+  amount        Int
+  balanceAfter  Int
+  creationJobId String?
+  createdAt     DateTime @default(now())
+}
+
+model UserSettings {
+  id                 String   @id
+  sessionId          String
+  notificationLevel  String
+  quietMode          Boolean  @default(false)
+  medicalDisclaimer  Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}

@@ -1,0 +1,248 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1500" viewBox="0 0 2400 1500">
+  <defs>
+    <style>
+      .bg { fill: #f7f4ef; }
+      .title { font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif; fill: #1f2933; font-weight: 800; }
+      .text { font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif; fill: #33424d; }
+      .muted { font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", sans-serif; fill: #71808a; }
+      .frame { fill: #fffdf9; stroke: #c8c2b9; stroke-width: 2.2; }
+      .bar { fill: #ece8df; }
+      .side { fill: #f3efe7; stroke: #ddd7cb; stroke-width: 1.5; }
+      .box { fill: #ffffff; stroke: #c9d0d4; stroke-width: 1.8; }
+      .boxSoft { fill: #f7f8f8; stroke: #d7dcdf; stroke-width: 1.6; }
+      .line { stroke: #c7cdd1; stroke-width: 2; stroke-linecap: round; }
+      .accent { fill: #ff7a45; }
+      .accentStroke { stroke: #ff7a45; stroke-width: 2.4; fill: none; }
+      .blueStroke { stroke: #2d8fbd; stroke-width: 3.5; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+      .redStroke { stroke: #e2574c; stroke-width: 3.5; fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 8 8; }
+      .grayStroke { stroke: #9aa6ad; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 5 8; }
+      .screenTitle { font-size: 27px; font-weight: 800; }
+      .small { font-size: 16px; }
+      .tiny { font-size: 13px; }
+      .pill { fill: #fff5ee; stroke: #ffb28e; stroke-width: 1.6; }
+      .badge { fill: #ffffff; stroke: #2d8fbd; stroke-width: 2; }
+    </style>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2d8fbd"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#e2574c"/>
+    </marker>
+    <marker id="arrow-gray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9aa6ad"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="2400" height="1500"/>
+
+  <g transform="translate(70 58)">
+    <rect x="0" y="0" width="82" height="82" rx="16" fill="#0f1115"/>
+    <rect x="22" y="19" width="38" height="16" rx="2" fill="#ff7a45"/>
+    <rect x="34" y="40" width="15" height="28" rx="1.5" fill="#ffffff"/>
+    <text class="title" x="108" y="34" font-size="30">PawRoom Web 平台</text>
+    <text class="title" x="108" y="78" font-size="44">低保真 UX 界面流程图</text>
+  </g>
+  <text class="muted" x="1800" y="88" font-size="23">基于 IA v0.2 / 参考宠物项圈产品 Web 库</text>
+  <text class="title" x="1810" y="130" font-size="34">安全看护优先，互动与创作增强</text>
+
+  <!-- Legend -->
+  <g transform="translate(70 140)">
+    <path class="blueStroke" d="M 0 0 H 76" marker-end="url(#arrow-blue)"/>
+    <text class="text small" x="90" y="6">主流程</text>
+    <path class="redStroke" d="M 180 0 H 256" marker-end="url(#arrow-red)"/>
+    <text class="text small" x="270" y="6">异常流程</text>
+    <path class="grayStroke" d="M 380 0 H 456" marker-end="url(#arrow-gray)"/>
+    <text class="text small" x="470" y="6">查看/配置分支</text>
+  </g>
+
+  <!-- Flow arrows -->
+  <path class="blueStroke" d="M 570 395 H 641" marker-end="url(#arrow-blue)"/>
+  <path class="blueStroke" d="M 1150 395 H 1221" marker-end="url(#arrow-blue)"/>
+  <path class="blueStroke" d="M 1730 395 H 1801" marker-end="url(#arrow-blue)"/>
+  <path class="blueStroke" d="M 2058 590 C 2058 662 1570 662 1570 743" marker-end="url(#arrow-blue)"/>
+  <path class="grayStroke" d="M 1480 590 C 1480 660 890 660 890 743" marker-end="url(#arrow-gray)"/>
+  <path class="redStroke" d="M 1560 590 C 1602 650 2058 650 2058 743" marker-end="url(#arrow-red)"/>
+  <path class="redStroke" d="M 2058 1105 C 2058 1176 342 1176 342 1225" marker-end="url(#arrow-red)"/>
+  <path class="grayStroke" d="M 1150 908 H 1221" marker-end="url(#arrow-gray)"/>
+
+  <!-- Screen 01 -->
+  <g transform="translate(70 230)">
+    <text class="title screenTitle" x="0" y="-22">01 宠物创建</text>
+    <rect class="frame" x="0" y="0" width="500" height="360" rx="22"/>
+    <rect class="bar" x="0" y="0" width="500" height="42" rx="22"/>
+    <circle class="accent" cx="28" cy="21" r="6"/><circle fill="#d9d2c7" cx="50" cy="21" r="6"/><circle fill="#d9d2c7" cx="72" cy="21" r="6"/>
+    <rect class="side" x="18" y="62" width="104" height="278" rx="14"/>
+    <rect class="pill" x="34" y="82" width="72" height="25" rx="12"/>
+    <text class="text tiny" x="45" y="100">创建</text>
+    <line class="line" x1="36" y1="132" x2="103" y2="132"/>
+    <line class="line" x1="36" y1="162" x2="103" y2="162"/>
+    <line class="line" x1="36" y1="192" x2="103" y2="192"/>
+    <rect class="boxSoft" x="148" y="70" width="138" height="160" rx="20"/>
+    <circle fill="#d8dde0" cx="217" cy="132" r="42"/>
+    <line class="line" x1="180" y1="192" x2="254" y2="192"/>
+    <text class="text small" x="148" y="258">上传照片 / 示例宠物</text>
+    <rect class="box" x="312" y="70" width="154" height="44" rx="12"/>
+    <rect class="box" x="312" y="130" width="154" height="44" rx="12"/>
+    <rect class="box" x="312" y="190" width="154" height="44" rx="12"/>
+    <rect class="pill" x="312" y="274" width="154" height="38" rx="19"/>
+    <text class="text small" x="336" y="298">生成宠物分身</text>
+  </g>
+
+  <!-- Screen 02 -->
+  <g transform="translate(650 230)">
+    <text class="title screenTitle" x="0" y="-22">02 分身生成与项圈连接</text>
+    <rect class="frame" x="0" y="0" width="500" height="360" rx="22"/>
+    <rect class="bar" x="0" y="0" width="500" height="42" rx="22"/>
+    <rect class="side" x="18" y="62" width="104" height="278" rx="14"/>
+    <rect class="pill" x="34" y="124" width="72" height="25" rx="12"/>
+    <text class="text tiny" x="45" y="142">连接</text>
+    <rect class="boxSoft" x="150" y="72" width="142" height="190" rx="22"/>
+    <circle fill="#d8dde0" cx="221" cy="145" r="46"/>
+    <path class="accentStroke" d="M 185 224 H 257"/>
+    <text class="text small" x="165" y="294">卡通分身预览</text>
+    <rect class="box" x="318" y="72" width="146" height="58" rx="14"/>
+    <text class="text tiny" x="338" y="106">项圈连接状态</text>
+    <rect class="box" x="318" y="148" width="146" height="58" rx="14"/>
+    <text class="text tiny" x="350" y="182">电量 / ID</text>
+    <rect class="box" x="318" y="224" width="146" height="58" rx="14"/>
+    <text class="text tiny" x="342" y="258">数据模拟脚本</text>
+    <rect class="pill" x="318" y="302" width="146" height="34" rx="17"/>
+    <text class="text small" x="352" y="324">进入看护</text>
+  </g>
+
+  <!-- Screen 03 -->
+  <g transform="translate(1230 230)">
+    <text class="title screenTitle" x="0" y="-22">03 看护首页</text>
+    <rect class="frame" x="0" y="0" width="500" height="360" rx="22"/>
+    <rect class="bar" x="0" y="0" width="500" height="42" rx="22"/>
+    <rect class="side" x="18" y="62" width="104" height="278" rx="14"/>
+    <rect class="pill" x="34" y="82" width="72" height="25" rx="12"/>
+    <text class="text tiny" x="45" y="100">总览</text>
+    <rect class="boxSoft" x="146" y="66" width="192" height="126" rx="18"/>
+    <text class="text small" x="170" y="98">一句话状态</text>
+    <rect fill="#e8ecee" x="170" y="122" width="126" height="14" rx="7"/>
+    <rect fill="#e8ecee" x="170" y="150" width="86" height="14" rx="7"/>
+    <rect class="box" x="356" y="66" width="112" height="126" rx="18"/>
+    <text class="text tiny" x="380" y="96">安全等级</text>
+    <circle fill="#d8dde0" cx="412" cy="135" r="26"/>
+    <rect class="box" x="146" y="212" width="148" height="104" rx="16"/>
+    <text class="text tiny" x="172" y="244">今日概览</text>
+    <rect class="box" x="318" y="212" width="150" height="104" rx="16"/>
+    <text class="text tiny" x="348" y="244">最近事件</text>
+    <rect class="pill" x="146" y="330" width="130" height="22" rx="11"/>
+    <rect class="pill" x="294" y="330" width="130" height="22" rx="11"/>
+  </g>
+
+  <!-- Screen 04 -->
+  <g transform="translate(1810 230)">
+    <text class="title screenTitle" x="0" y="-22">04 桌面小世界</text>
+    <rect class="frame" x="0" y="0" width="500" height="360" rx="22"/>
+    <rect class="bar" x="0" y="0" width="500" height="42" rx="22"/>
+    <rect class="boxSoft" x="22" y="62" width="306" height="254" rx="24"/>
+    <rect fill="#ece6da" x="48" y="92" width="254" height="188" rx="26"/>
+    <circle fill="#d8dde0" cx="164" cy="180" r="34"/>
+    <path class="accentStroke" d="M 72 246 C 120 196 204 248 278 124"/>
+    <rect class="box" x="348" y="62" width="126" height="82" rx="16"/>
+    <text class="text tiny" x="372" y="96">状态动效</text>
+    <rect class="box" x="348" y="162" width="126" height="82" rx="16"/>
+    <text class="text tiny" x="376" y="196">轻互动</text>
+    <rect class="box" x="348" y="262" width="126" height="54" rx="16"/>
+    <text class="text tiny" x="370" y="296">跨端预览</text>
+    <text class="muted tiny" x="50" y="342">房间地图 / 宠物分身 / 桌面小窗</text>
+  </g>
+
+  <!-- Screen 05 -->
+  <g transform="translate(650 745)">
+    <text class="title screenTitle" x="0" y="-22">05 项圈与数据</text>
+    <rect class="frame" x="0" y="0" width="500" height="360" rx="22"/>
+    <rect class="bar" x="0" y="0" width="500" height="42" rx="22"/>
+    <rect class="side" x="18" y="62" width="104" height="278" rx="14"/>
+    <rect class="pill" x="34" y="144" width="72" height="25" rx="12"/>
+    <text class="text tiny" x="45" y="162">数据</text>
+    <rect class="box" x="146" y="66" width="100" height="70" rx="15"/>
+    <rect class="box" x="260" y="66" width="100" height="70" rx="15"/>
+    <rect class="box" x="374" y="66" width="94" height="70" rx="15"/>
+    <text class="text tiny" x="168" y="105">连接</text>
+    <text class="text tiny" x="292" y="105">电量</text>
+    <text class="text tiny" x="388" y="105">更新</text>
+    <rect class="boxSoft" x="146" y="158" width="322" height="86" rx="18"/>
+    <polyline class="accentStroke" points="166,218 212,196 258,210 306,178 358,188 438,168"/>
+    <text class="text tiny" x="166" y="186">活动与家庭区域趋势</text>
+    <rect class="box" x="146" y="264" width="150" height="62" rx="15"/>
+    <text class="text tiny" x="170" y="300">生命状态趋势</text>
+    <rect class="box" x="318" y="264" width="150" height="62" rx="15"/>
+    <text class="text tiny" x="346" y="300">数据边界</text>
+  </g>
+
+  <!-- Screen 06 -->
+  <g transform="translate(1810 745)">
+    <text class="title screenTitle" x="0" y="-22">06 异常处理</text>
+    <rect class="frame" x="0" y="0" width="500" height="360" rx="22"/>
+    <rect class="bar" x="0" y="0" width="500" height="42" rx="22"/>
+    <rect class="boxSoft" x="28" y="66" width="210" height="248" rx="22"/>
+    <text class="text small" x="56" y="104">异常原因</text>
+    <rect fill="#e8ecee" x="56" y="130" width="128" height="14" rx="7"/>
+    <rect fill="#e8ecee" x="56" y="158" width="96" height="14" rx="7"/>
+    <rect class="box" x="266" y="66" width="196" height="76" rx="16"/>
+    <text class="text tiny" x="292" y="108">查看建议操作</text>
+    <rect class="box" x="266" y="162" width="196" height="76" rx="16"/>
+    <text class="text tiny" x="300" y="204">稍后提醒</text>
+    <rect class="box" x="266" y="258" width="196" height="56" rx="16"/>
+    <text class="text tiny" x="300" y="292">标记误报 / 设置</text>
+    <rect class="pill" x="56" y="266" width="128" height="30" rx="15"/>
+    <text class="text tiny" x="82" y="286">非诊断提示</text>
+  </g>
+
+  <!-- Screen 07 -->
+  <g transform="translate(1230 745)">
+    <text class="title screenTitle" x="0" y="-22">07 今日回放与创作</text>
+    <rect class="frame" x="0" y="0" width="500" height="360" rx="22"/>
+    <rect class="bar" x="0" y="0" width="500" height="42" rx="22"/>
+    <rect class="boxSoft" x="28" y="66" width="156" height="248" rx="18"/>
+    <line class="line" x1="68" y1="98" x2="68" y2="282"/>
+    <circle class="accent" cx="68" cy="116" r="7"/>
+    <circle fill="#d8dde0" cx="68" cy="174" r="7"/>
+    <circle fill="#d8dde0" cx="68" cy="232" r="7"/>
+    <text class="text tiny" x="92" y="121">今日时间轴</text>
+    <text class="text tiny" x="92" y="179">路径回放</text>
+    <text class="text tiny" x="92" y="237">补充事件</text>
+    <rect class="box" x="208" y="66" width="110" height="86" rx="16"/>
+    <text class="text tiny" x="235" y="112">小剧场</text>
+    <rect class="box" x="340" y="66" width="110" height="86" rx="16"/>
+    <text class="text tiny" x="365" y="112">四格漫画</text>
+    <rect class="box" x="208" y="176" width="110" height="86" rx="16"/>
+    <text class="text tiny" x="244" y="222">表情包</text>
+    <rect class="box" x="340" y="176" width="110" height="86" rx="16"/>
+    <text class="text tiny" x="369" y="222">角色卡</text>
+    <rect class="pill" x="208" y="292" width="242" height="34" rx="17"/>
+    <text class="text small" x="268" y="315">分享导出 / 额度提示</text>
+  </g>
+
+  <!-- Screen 08 -->
+  <g transform="translate(70 1225)">
+    <text class="title screenTitle" x="0" y="-22">08 我的与设置</text>
+    <rect class="frame" x="0" y="0" width="500" height="220" rx="22"/>
+    <rect class="bar" x="0" y="0" width="500" height="42" rx="22"/>
+    <rect class="side" x="18" y="62" width="104" height="138" rx="14"/>
+    <rect class="pill" x="34" y="144" width="72" height="25" rx="12"/>
+    <text class="text tiny" x="45" y="162">设置</text>
+    <rect class="box" x="146" y="66" width="142" height="48" rx="14"/>
+    <text class="text tiny" x="178" y="96">宠物档案</text>
+    <rect class="box" x="310" y="66" width="142" height="48" rx="14"/>
+    <text class="text tiny" x="342" y="96">安全区域</text>
+    <rect class="box" x="146" y="134" width="142" height="48" rx="14"/>
+    <text class="text tiny" x="178" y="164">提醒偏好</text>
+    <rect class="box" x="310" y="134" width="142" height="48" rx="14"/>
+    <text class="text tiny" x="338" y="164">AI 创作额度</text>
+  </g>
+
+  <!-- Notes -->
+  <g transform="translate(650 1225)">
+    <rect fill="#fffdf9" stroke="#d6d0c6" stroke-width="2" x="0" y="0" width="1680" height="220" rx="24"/>
+    <text class="title" x="38" y="48" font-size="28">低保真布局原则</text>
+    <text class="text" x="38" y="92" font-size="20">1. Web 主体采用「左侧栏 + 主画布」的工作台结构。</text>
+    <text class="text" x="38" y="128" font-size="20">2. 看护首页是默认入口；桌面小世界是核心差异化体验；今日回放承接情绪价值和分享。</text>
+    <text class="text" x="38" y="164" font-size="20">3. 项圈数据、异常处理、非诊断提示必须保持可见，避免把安全能力包装成纯娱乐。</text>
+    <text class="text" x="38" y="200" font-size="20">4. 视觉延续参考库的暖色卡片底层，但当前阶段只画结构框，不进入高保真图形细节。</text>
+  </g>
+</svg>
