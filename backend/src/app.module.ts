@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { AppController } from './app.controller';
 import { CreationsModule } from './creations/creations.module';
 import { CreditsModule } from './credits/credits.module';
 import { DemoModule } from './demo/demo.module';
@@ -29,5 +30,6 @@ import { VisualStudioModule } from './visual-studio/visual-studio.module';
     SettingsModule,
     VisualStudioModule,
   ],
+  controllers: [AppController],
 })
 export class AppModule {}
