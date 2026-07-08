@@ -1,8 +1,8 @@
 # PawSentinel Documentation Index
 
-This folder contains the public-facing product, technical, design, research, and demo materials for **PawSentinel**, an AI pet safety monitoring system built around smart-collar telemetry and an interactive desktop companion world.
+This folder contains the public-facing product, technical, design, research, and demo materials for **PawSentinel**, an AI pet safety monitoring system built around smart-collar telemetry, user-uploaded pet assets, AI-generated cartoon pixel avatars, and an interactive desktop companion world.
 
-本目录是 PawSentinel 项目的公开文档入口，适合评审、协作者或后续开发者快速理解产品机会、软硬件方案、MVP 实现和验证材料。
+本目录是 PawSentinel 项目的公开文档入口，适合评审、协作者或后续开发者快速理解产品机会、软硬件方案、MVP 实现和验证材料。项目中的宠物分身来自用户上传的自家宠物照片、声音或素材图，再通过 AI 工作流转译为卡通化、像素化的专属形象。
 
 ## Start Here / 快速阅读路径
 
