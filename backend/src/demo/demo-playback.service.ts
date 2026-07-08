@@ -1,10 +1,37 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { RawCollarSample } from '../common/types/pawroom.types';
+import {
+  PetStateSnapshot,
+  RawCollarSample,
+  TimelineEvent,
+} from '../common/types/pawroom.types';
 import { RealtimeGateway } from '../realtime/realtime.gateway';
 import { PetStateEngineService } from '../state/pet-state-engine.service';
 import { PAWROOM_STORE, PawRoomStore } from '../store/pawroom-store.port';
 import { TimelineService } from '../timeline/timeline.service';
 import { MockScenariosLoader } from './mock-scenarios.loader';
+
+type PlaybackOptions = {
+  includeFirst?: boolean;
+  intervalMs?: number;
+};
+
+type ImmediatePlaybackResult = {
+  sessionId: string;
+  scenarioId: string;
+  playbackMode: 'immediate';
+  playedSampleCount: number;
+  snapshots: PetStateSnapshot[];
+  timelineEvents: TimelineEvent[];
+};
+
+type ScheduledPlaybackResult = {
+  sessionId: string;
+  scenarioId: string;
+  playbackMode: 'scheduled';
+  intervalMs: number;
+  playedSampleCount: number;
+  queuedSampleCount: number;
+};
 
 @Injectable()
 export class DemoPlaybackService {
@@ -16,7 +43,19 @@ export class DemoPlaybackService {
     @Inject(PAWROOM_STORE) private readonly store: PawRoomStore,
   ) {}
 
-  playSession(sessionId: string, options: { includeFirst?: boolean } = {}) {
+  playSession(sessionId: string): ImmediatePlaybackResult;
+  playSession(
+    sessionId: string,
+    options: PlaybackOptions & { intervalMs?: 0 },
+  ): ImmediatePlaybackResult;
+  playSession(
+    sessionId: string,
+    options: PlaybackOptions,
+  ): ImmediatePlaybackResult | ScheduledPlaybackResult;
+  playSession(
+    sessionId: string,
+    options: PlaybackOptions = {},
+  ): ImmediatePlaybackResult | ScheduledPlaybackResult {
     const session = this.store.getSession(sessionId);
     if (!session) {
       throw new NotFoundException(`Demo session ${sessionId} not found`);
@@ -28,11 +67,31 @@ export class DemoPlaybackService {
     }
 
     const samples = options.includeFirst ? scenario.samples : scenario.samples.slice(1);
+    const intervalMs = Math.max(0, Math.floor(options.intervalMs ?? 0));
+
+    if (intervalMs > 0) {
+      samples.forEach((sample, index) => {
+        setTimeout(() => {
+          this.playSample(sample, sessionId);
+        }, index * intervalMs);
+      });
+
+      return {
+        sessionId,
+        scenarioId: scenario.scenarioId,
+        playbackMode: 'scheduled',
+        intervalMs,
+        playedSampleCount: samples.length,
+        queuedSampleCount: samples.length,
+      };
+    }
+
     const played = samples.map((sample) => this.playSample(sample, sessionId));
 
     return {
       sessionId,
       scenarioId: scenario.scenarioId,
+      playbackMode: 'immediate',
       playedSampleCount: played.length,
       snapshots: played.map((item) => item.snapshot),
       timelineEvents: played.map((item) => item.timelineEvent),

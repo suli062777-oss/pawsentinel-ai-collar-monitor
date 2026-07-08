@@ -1,4 +1,4 @@
-import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { IsBoolean, IsInt, IsOptional, IsString, Max, Min } from 'class-validator';
 
 export class CreateDemoSessionDto {
   @IsOptional()
@@ -10,4 +10,10 @@ export class PlaybackDemoSessionDto {
   @IsOptional()
   @IsBoolean()
   includeFirst?: boolean;
+
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  @Max(5000)
+  intervalMs?: number;
 }

@@ -155,6 +155,16 @@ http://127.0.0.1:4177
 
 The prototype can also be opened directly from `frontend/index.html`.
 
+### Full P0 Demo
+
+Run the backend and frontend together, then open the desktop world:
+
+```text
+http://127.0.0.1:4177/?page=world
+```
+
+The frontend automatically connects to the backend at `http://localhost:4000`, loads mock collar scenarios, receives Socket.IO state updates, and drives the desktop pet world, alerts, and timeline. If the backend uses another port, pass it as `?api=http://localhost:4001`.
+
 ## Validation
 
 Backend:

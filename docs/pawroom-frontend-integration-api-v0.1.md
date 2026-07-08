@@ -140,18 +140,25 @@ npm run start
 
 ```json
 {
-  "includeFirst": false
+  "includeFirst": true,
+  "intervalMs": 1000
 }
 ```
 
-用途：把当前 session 对应剧本里的项圈样本依次转成状态，并推送 WebSocket 事件。
+用途：把当前 session 对应剧本里的项圈样本转成状态，并推送 WebSocket 事件。
+
+- `includeFirst`: 是否从第一条样本开始播放；默认 `false`。
+- `intervalMs`: 每条样本之间的播放间隔；默认 `0`，表示立即一次性播放。P0 前端演示使用 `1000`，让桌面小世界按秒接收状态变化。最大值 `5000`。
 
 返回关键字段：
+
+立即播放：
 
 ```json
 {
   "sessionId": "demo_xxx",
   "scenarioId": "attention_day",
+  "playbackMode": "immediate",
   "playedSampleCount": 4,
   "snapshots": [
     {
@@ -167,6 +174,21 @@ npm run start
   ]
 }
 ```
+
+定时播放：
+
+```json
+{
+  "sessionId": "demo_xxx",
+  "scenarioId": "attention_day",
+  "playbackMode": "scheduled",
+  "intervalMs": 1000,
+  "playedSampleCount": 5,
+  "queuedSampleCount": 5
+}
+```
+
+前端在 `scheduled` 模式下不应依赖返回体里的 `snapshots`，而是通过 Socket.IO 消费 `pet.state.updated`、`scene.animation.command`、`timeline.event.created` 和 `device.status.updated`。
 
 ### 手动上报一条项圈数据
 

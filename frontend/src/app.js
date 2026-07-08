@@ -30,6 +30,24 @@ const pet = {
 };
 
 const queryParams = new URLSearchParams(window.location.search);
+const BACKEND_BASE_URL = (queryParams.get("api") || localStorage.getItem("pawsentinelApiBase") || "http://localhost:4000").replace(/\/$/, "");
+const DEMO_PLAYBACK_INTERVAL_MS = 1000;
+
+const scenarioDisplay = {
+  quiet_day: { name: "安静日", short: "安静", tone: "safe" },
+  active_day: { name: "活跃日", short: "活跃", tone: "safe" },
+  waiting_day: { name: "等主人日", short: "等待", tone: "watch" },
+  attention_day: { name: "需关注日", short: "关注", tone: "attention" },
+};
+
+const zoneViewMap = {
+  bed: { label: "宠物窝", x: 126, y: 612, nodeX: 176, nodeY: 642 },
+  sofa: { label: "沙发", x: 610, y: 408, nodeX: 670, nodeY: 474 },
+  bowl: { label: "饭盆", x: 784, y: 538, nodeX: 840, nodeY: 606 },
+  window: { label: "窗边", x: 838, y: 206, nodeX: 900, nodeY: 270 },
+  toy_area: { label: "玩具区", x: 858, y: 342, nodeX: 930, nodeY: 410 },
+  door: { label: "门口", x: 490, y: 676, nodeX: 550, nodeY: 742 },
+};
 
 const statusProfiles = {
   normal: {
@@ -135,9 +153,9 @@ const statusProfiles = {
   },
 };
 
-const statusProfile = statusProfiles[queryParams.get("mode")] || statusProfiles.normal;
+let statusProfile = { ...(statusProfiles[queryParams.get("mode")] || statusProfiles.normal) };
 
-const telemetry = {
+let telemetry = {
   status: statusProfile.status,
   safety: statusProfile.safety,
   zone: statusProfile.zone,
@@ -150,7 +168,7 @@ const telemetry = {
   breath: statusProfile.breath,
 };
 
-const worldRoute = [
+let worldRoute = [
   { time: "09:05", zone: "宠物窝", status: "在宠物窝休息", source: "项圈记录", action: "睡觉", routine: "sleep", x: 126, y: 612, nodeX: 176, nodeY: 642 },
   { time: "09:22", zone: "书房", status: "从餐厅进入书房", source: "项圈记录", action: "巡逻", routine: "patrol", x: 338, y: 214, nodeX: 398, nodeY: 282 },
   { time: "09:40", zone: "饭盆", status: "在餐厅活动", source: "项圈记录", action: "吃饭", routine: "eat", x: 784, y: 538, nodeX: 840, nodeY: 606 },
@@ -192,7 +210,7 @@ const routineCards = [
 const interactionItems = ["摸摸", "投喂", "叫名字", "扔玩具"];
 const interactionRouteMap = { 投喂: 2, 叫名字: 4, 扔玩具: 5 };
 
-const events = worldRoute.map((point) => [point.time, point.status, point.source]);
+let events = worldRoute.map((point) => [point.time, point.status, point.source]);
 const journeyGenerationSteps = [
   { label: "读取项圈记录", detail: "同步路径、区域和活动状态" },
   { label: "整理用户补充", detail: "合并今天的备注事件" },
@@ -235,6 +253,23 @@ let generationPhase = 0;
 let generationTimers = [];
 let exportState = "idle";
 let exportTimer = null;
+const demoRuntime = {
+  apiBase: BACKEND_BASE_URL,
+  backendStatus: "checking",
+  socketStatus: "idle",
+  scenarios: [],
+  selectedScenarioId: queryParams.get("scenario") || "quiet_day",
+  currentScenario: null,
+  session: null,
+  socket: null,
+  loading: false,
+  playing: false,
+  lastError: "",
+  timelineEvents: [],
+  alertEvents: [],
+  lastSnapshot: null,
+  deviceStatus: null,
+};
 
 
 function getGeneratedAsset(id) {
@@ -292,6 +327,401 @@ function renderWorldRouteLayer(routeProgressValue) {
       <polyline class="route-progress-stroke" points="${points}" pathLength="100" style="stroke-dashoffset:${strokeOffset}"></polyline>
     </svg>
   `;
+}
+
+function formatBackendTime(timestamp) {
+  if (!timestamp) return "--:--";
+  const date = new Date(timestamp);
+  if (Number.isNaN(date.getTime())) return String(timestamp).slice(11, 16) || "--:--";
+  return date.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit", hour12: false });
+}
+
+function normalizeConfidence(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return 0;
+  return Math.round(number <= 1 ? number * 100 : number);
+}
+
+function zoneLabel(zoneId) {
+  return zoneViewMap[zoneId]?.label || zoneId || "未知区域";
+}
+
+function safetyLabel(safetyLevel) {
+  if (safetyLevel === "attention") return "需关注";
+  if (safetyLevel === "watch") return "中";
+  return "高";
+}
+
+function profileKeyForSnapshot(snapshot) {
+  if (!snapshot) return "normal";
+  if (snapshot.battery < 20) return "lowBattery";
+  if (snapshot.safetyLevel === "attention") return "attention";
+  if (snapshot.safetyLevel === "watch") return "attention";
+  return "normal";
+}
+
+function actionForState(stateKey, animationKey = "") {
+  if (animationKey.includes("bowl")) return "吃饭";
+  if (animationKey.includes("door") || stateKey === "waiting") return "等主人";
+  if (animationKey.includes("toy") || stateKey === "playing") return "扔玩具";
+  if (stateKey === "sleeping") return "睡觉";
+  if (stateKey === "resting") return "休息";
+  return "巡逻";
+}
+
+function routineForState(stateKey, animationKey = "") {
+  if (animationKey.includes("bowl")) return "eat";
+  if (animationKey.includes("door") || stateKey === "waiting") return "wait";
+  if (stateKey === "sleeping" || animationKey.includes("rest")) return "sleep";
+  return "patrol";
+}
+
+function estimateActivity(snapshot) {
+  const values = {
+    sleeping: 118,
+    resting: 168,
+    walking: 238,
+    waiting: 196,
+    playing: 304,
+    needs_attention: 142,
+    offline: 0,
+  };
+  const batteryOffset = snapshot?.battery ? Math.max(-18, Math.round((snapshot.battery - 50) / 5)) : 0;
+  return Math.max(0, (values[snapshot?.stateKey] ?? 210) + batteryOffset);
+}
+
+function estimateRest(snapshot) {
+  const values = {
+    sleeping: 9.4,
+    resting: 8.2,
+    walking: 6.8,
+    waiting: 7.4,
+    playing: 5.6,
+    needs_attention: 10.6,
+    offline: 0,
+  };
+  return values[snapshot?.stateKey] ?? 8.2;
+}
+
+function estimateHeart(snapshot) {
+  if (snapshot?.stateKey === "needs_attention") return 104;
+  if (snapshot?.stateKey === "playing") return 112;
+  if (snapshot?.stateKey === "sleeping") return 86;
+  return 94;
+}
+
+function estimateBreath(snapshot) {
+  if (snapshot?.stateKey === "needs_attention") return 25;
+  if (snapshot?.stateKey === "playing") return 24;
+  if (snapshot?.stateKey === "sleeping") return 18;
+  return 21;
+}
+
+function routePointFromSample(sample, index = 0) {
+  const view = zoneViewMap[sample.zoneId] || zoneViewMap.sofa;
+  const expected = sample.expectedState || {};
+  const stateKey = expected.stateKey || "walking";
+  const animationKey = expected.animationKey || "";
+  return {
+    time: formatBackendTime(sample.timestamp),
+    zone: view.label,
+    status: expected.bubbleText || `${view.label}状态更新`,
+    source: "Mock 项圈",
+    action: actionForState(stateKey, animationKey),
+    routine: routineForState(stateKey, animationKey),
+    x: view.x,
+    y: view.y,
+    nodeX: view.nodeX + index * 4,
+    nodeY: view.nodeY + index * 4,
+    sampleId: sample.sampleId,
+    zoneId: sample.zoneId,
+    timestamp: sample.timestamp,
+  };
+}
+
+function routePointFromSnapshot(snapshot) {
+  const view = zoneViewMap[snapshot.zoneId] || zoneViewMap.sofa;
+  return {
+    time: formatBackendTime(snapshot.timestamp),
+    zone: view.label,
+    status: snapshot.bubbleText || `${view.label}状态更新`,
+    source: "状态引擎",
+    action: actionForState(snapshot.stateKey, snapshot.animationKey),
+    routine: routineForState(snapshot.stateKey, snapshot.animationKey),
+    x: view.x,
+    y: view.y,
+    nodeX: view.nodeX,
+    nodeY: view.nodeY,
+    sampleId: snapshot.sampleId,
+    zoneId: snapshot.zoneId,
+    timestamp: snapshot.timestamp,
+  };
+}
+
+function refreshEventsFromTimeline() {
+  if (!demoRuntime.timelineEvents.length) {
+    events = worldRoute.map((point) => [point.time, point.status, point.source]);
+    return;
+  }
+  events = demoRuntime.timelineEvents.map((event) => [
+    formatBackendTime(event.timestamp),
+    event.description || event.title,
+    sourceLabel(event.source, event.severity),
+  ]);
+}
+
+function sourceLabel(source, severity) {
+  if (severity === "attention") return "安全提醒";
+  if (severity === "watch") return "轻微关注";
+  if (source === "user") return "用户补充";
+  if (source === "ai") return "AI 演绎";
+  return "项圈记录";
+}
+
+function applyScenarioRoute(scenario) {
+  const samples = Array.isArray(scenario?.samples) ? scenario.samples : [];
+  if (!samples.length) return;
+  worldRoute = samples.map(routePointFromSample);
+  activeJourneyEvent = 0;
+  worldInteraction = getActiveRoutePoint().action;
+  events = worldRoute.map((point) => [point.time, point.status, point.source]);
+}
+
+function applySnapshot(snapshot, shouldRender = true) {
+  if (!snapshot) return;
+  demoRuntime.lastSnapshot = snapshot;
+  const profileKey = profileKeyForSnapshot(snapshot);
+  const nextProfile = { ...(statusProfiles[profileKey] || statusProfiles.normal) };
+  const zone = zoneLabel(snapshot.zoneId);
+  const confidence = normalizeConfidence(snapshot.confidence);
+  const sync = formatBackendTime(snapshot.timestamp);
+  const alertCount = demoRuntime.alertEvents.length + (snapshot.safetyLevel === "safe" ? 0 : 1);
+
+  nextProfile.status = snapshot.bubbleText || nextProfile.status;
+  nextProfile.safety = safetyLabel(snapshot.safetyLevel);
+  nextProfile.zone = zone;
+  nextProfile.battery = Math.round(snapshot.battery ?? nextProfile.battery);
+  nextProfile.confidence = confidence;
+  nextProfile.sync = sync;
+  nextProfile.alertCount = alertCount;
+  nextProfile.alertTitle = snapshot.safetyLevel === "safe" ? "实时正常" : snapshot.safetyLevel === "watch" ? "轻微关注" : "安全提醒";
+  nextProfile.alertText = snapshot.disclaimer || snapshot.bubbleText || nextProfile.alertText;
+  nextProfile.confidenceText = `后端状态引擎置信度 ${confidence}%`;
+  nextProfile.batteryTitle = `项圈在线，电量 ${nextProfile.battery}%`;
+  nextProfile.batteryAdvice = snapshot.battery < 20 ? "电量偏低，请尽快充电。" : `最近同步 ${sync}，设备在线。`;
+  nextProfile.dataNote = snapshot.disclaimer || "生命状态仅作趋势参考，不构成医疗诊断。";
+  delete nextProfile.batteryDisplay;
+  statusProfile = nextProfile;
+
+  telemetry = {
+    status: nextProfile.status,
+    safety: nextProfile.safety,
+    zone,
+    battery: nextProfile.battery,
+    confidence,
+    sync,
+    activity: estimateActivity(snapshot),
+    rest: estimateRest(snapshot),
+    heart: estimateHeart(snapshot),
+    breath: estimateBreath(snapshot),
+  };
+
+  const nextPoint = routePointFromSnapshot(snapshot);
+  const existingIndex = worldRoute.findIndex((point) => point.sampleId && point.sampleId === snapshot.sampleId);
+  if (existingIndex >= 0) {
+    worldRoute[existingIndex] = { ...worldRoute[existingIndex], ...nextPoint };
+    activeJourneyEvent = existingIndex;
+  } else {
+    worldRoute.push(nextPoint);
+    activeJourneyEvent = worldRoute.length - 1;
+  }
+  worldInteraction = getActiveRoutePoint().action;
+  refreshEventsFromTimeline();
+  if (shouldRender) renderCurrentPage();
+}
+
+function addTimelineEvent(event, shouldRender = true) {
+  if (!event?.id) return;
+  const existingIndex = demoRuntime.timelineEvents.findIndex((item) => item.id === event.id);
+  if (existingIndex >= 0) {
+    demoRuntime.timelineEvents[existingIndex] = event;
+  } else {
+    demoRuntime.timelineEvents.push(event);
+  }
+  demoRuntime.timelineEvents.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
+  refreshEventsFromTimeline();
+  if (event.severity === "watch" || event.severity === "attention") addAlertEvent(event, false);
+  if (shouldRender) renderCurrentPage();
+}
+
+function addAlertEvent(event, shouldRender = true) {
+  if (!event?.id || demoRuntime.alertEvents.some((item) => item.id === event.id)) return;
+  demoRuntime.alertEvents.push(event);
+  if (demoRuntime.alertEvents.length > 4) demoRuntime.alertEvents.shift();
+  if (shouldRender) renderCurrentPage();
+}
+
+async function apiJson(path, options = {}) {
+  const response = await fetch(`${demoRuntime.apiBase}${path}`, {
+    method: options.method || "GET",
+    headers: options.body ? { "content-type": "application/json" } : undefined,
+    body: options.body ? JSON.stringify(options.body) : undefined,
+  });
+  const text = await response.text();
+  if (!response.ok) throw new Error(`${options.method || "GET"} ${path} failed: ${response.status} ${text}`);
+  return text ? JSON.parse(text) : null;
+}
+
+async function initBackendDemo() {
+  demoRuntime.loading = true;
+  demoRuntime.backendStatus = "checking";
+  renderCurrentPage();
+  try {
+    await apiJson("/health");
+    demoRuntime.backendStatus = "online";
+    demoRuntime.scenarios = await apiJson("/demo/scenarios");
+    await selectDemoScenario(demoRuntime.selectedScenarioId, { silent: true });
+  } catch (error) {
+    demoRuntime.backendStatus = "offline";
+    demoRuntime.socketStatus = "offline";
+    demoRuntime.lastError = error.message;
+    showToast("后端未连接，当前显示静态原型。");
+  } finally {
+    demoRuntime.loading = false;
+    renderCurrentPage();
+  }
+}
+
+async function selectDemoScenario(scenarioId, options = {}) {
+  demoRuntime.loading = true;
+  demoRuntime.playing = false;
+  demoRuntime.selectedScenarioId = scenarioId;
+  demoRuntime.timelineEvents = [];
+  demoRuntime.alertEvents = [];
+  renderCurrentPage();
+  try {
+    const scenario = await apiJson(`/demo/scenarios/${encodeURIComponent(scenarioId)}`);
+    demoRuntime.currentScenario = scenario;
+    applyScenarioRoute(scenario);
+    const session = await apiJson("/demo/sessions", {
+      method: "POST",
+      body: { scenarioId },
+    });
+    demoRuntime.session = session;
+    Object.assign(pet, {
+      name: session.pet?.name?.split(" ")[0] || pet.name,
+      alias: session.pet?.name?.split(" ")[1] || pet.alias,
+      breed: session.pet?.breed || pet.breed,
+      collar: session.device?.name || pet.collar,
+    });
+    await ensureSocketConnection(session.sessionId);
+    await apiJson("/devices/mock/connect", {
+      method: "POST",
+      body: { sessionId: session.sessionId },
+    });
+    const [latest, timeline] = await Promise.all([
+      apiJson(`/pets/${encodeURIComponent(session.pet.petId)}/state/latest`),
+      apiJson(`/pets/${encodeURIComponent(session.pet.petId)}/timeline`),
+    ]);
+    demoRuntime.timelineEvents = [];
+    for (const event of timeline) addTimelineEvent(event, false);
+    applySnapshot(latest, false);
+    refreshEventsFromTimeline();
+    if (!options.silent) showToast(`已切换到 ${scenarioDisplay[scenarioId]?.name || scenario.name}`);
+  } catch (error) {
+    demoRuntime.backendStatus = "error";
+    demoRuntime.lastError = error.message;
+    showToast("场景连接失败，请确认后端正在运行。");
+  } finally {
+    demoRuntime.loading = false;
+    renderCurrentPage();
+  }
+}
+
+function loadSocketIoClient() {
+  if (window.io) return Promise.resolve();
+  return new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = `${demoRuntime.apiBase}/socket.io/socket.io.js`;
+    script.async = true;
+    script.onload = resolve;
+    script.onerror = () => reject(new Error("Socket.IO 客户端加载失败"));
+    document.head.appendChild(script);
+  });
+}
+
+async function ensureSocketConnection(sessionId) {
+  await loadSocketIoClient();
+  if (demoRuntime.socket) {
+    demoRuntime.socket.disconnect();
+    demoRuntime.socket = null;
+  }
+  const socket = window.io(demoRuntime.apiBase, {
+    transports: ["websocket", "polling"],
+  });
+  demoRuntime.socket = socket;
+  demoRuntime.socketStatus = "connecting";
+
+  socket.on("connect", () => {
+    demoRuntime.socketStatus = "online";
+    socket.emit("demo.session.join", { sessionId });
+    renderCurrentPage();
+  });
+  socket.on("disconnect", () => {
+    demoRuntime.socketStatus = "offline";
+    renderCurrentPage();
+  });
+  socket.on("connect_error", (error) => {
+    demoRuntime.socketStatus = "error";
+    demoRuntime.lastError = error.message;
+    renderCurrentPage();
+  });
+  socket.on("pet.state.updated", (snapshot) => applySnapshot(snapshot));
+  socket.on("scene.animation.command", (command) => {
+    if (command?.bubbleText && demoRuntime.lastSnapshot) {
+      applySnapshot({ ...demoRuntime.lastSnapshot, ...command }, true);
+    }
+  });
+  socket.on("timeline.event.created", (event) => addTimelineEvent(event));
+  socket.on("pet.alert.created", (event) => {
+    addAlertEvent(event);
+    showToast(event.description || event.title || "收到安全提醒");
+  });
+  socket.on("device.status.updated", (deviceStatus) => {
+    demoRuntime.deviceStatus = deviceStatus;
+    if (typeof deviceStatus?.battery === "number") {
+      statusProfile.battery = Math.round(deviceStatus.battery);
+      telemetry.battery = Math.round(deviceStatus.battery);
+    }
+    renderCurrentPage();
+  });
+}
+
+async function playBackendScenario() {
+  if (!demoRuntime.session || demoRuntime.playing) return;
+  demoRuntime.playing = true;
+  demoRuntime.timelineEvents = [];
+  demoRuntime.alertEvents = [];
+  refreshEventsFromTimeline();
+  showToast("开始播放后端 Mock 项圈剧本。");
+  renderCurrentPage();
+  try {
+    const result = await apiJson(`/demo/sessions/${encodeURIComponent(demoRuntime.session.sessionId)}/playback`, {
+      method: "POST",
+      body: { includeFirst: true, intervalMs: DEMO_PLAYBACK_INTERVAL_MS },
+    });
+    const totalMs = Math.max(1, result.queuedSampleCount || result.playedSampleCount || 1) * DEMO_PLAYBACK_INTERVAL_MS;
+    setTimeout(() => {
+      demoRuntime.playing = false;
+      showToast("后端剧本播放完成。");
+      renderCurrentPage();
+    }, totalMs + 400);
+  } catch (error) {
+    demoRuntime.playing = false;
+    demoRuntime.lastError = error.message;
+    showToast("播放失败，请检查后端服务。");
+    renderCurrentPage();
+  }
 }
 
 function getBatteryDisplay() {
@@ -424,6 +854,41 @@ function lineChart(color = "var(--brand-deep)") {
   `;
 }
 
+function renderDemoControlBar() {
+  const backendLabel = demoRuntime.backendStatus === "online" ? "后端在线" : demoRuntime.backendStatus === "checking" ? "检查中" : "后端离线";
+  const socketLabel = demoRuntime.socketStatus === "online" ? "实时已连接" : demoRuntime.socketStatus === "connecting" ? "实时连接中" : "实时未连接";
+  const scenarios = demoRuntime.scenarios.length
+    ? demoRuntime.scenarios
+    : Object.keys(scenarioDisplay).map((scenarioId) => ({ scenarioId, name: scenarioDisplay[scenarioId].name }));
+  return `
+    <section class="demo-control-bar glass" aria-label="P0 后端联调控制台">
+      <div class="demo-status-group">
+        <span class="demo-live-dot ${demoRuntime.backendStatus === "online" ? "online" : ""}"></span>
+        <strong>P0 联调</strong>
+        <span>${backendLabel}</span>
+        <span>${socketLabel}</span>
+      </div>
+      <label class="demo-select-wrap">
+        <span>场景</span>
+        <select data-demo-scenario ${demoRuntime.loading || demoRuntime.playing ? "disabled" : ""}>
+          ${scenarios.map((scenario) => {
+            const display = scenarioDisplay[scenario.scenarioId] || { name: scenario.name || scenario.scenarioId };
+            return `<option value="${scenario.scenarioId}" ${scenario.scenarioId === demoRuntime.selectedScenarioId ? "selected" : ""}>${display.name}</option>`;
+          }).join("")}
+        </select>
+      </label>
+      <button class="demo-control-button" data-demo-reconnect ${demoRuntime.loading ? "disabled" : ""}>重连</button>
+      <button class="demo-control-button primary" data-demo-play ${!demoRuntime.session || demoRuntime.playing || demoRuntime.backendStatus !== "online" ? "disabled" : ""}>
+        ${demoRuntime.playing ? "播放中" : "播放场景"}
+      </button>
+      <div class="demo-current">
+        <span>${scenarioDisplay[demoRuntime.selectedScenarioId]?.short || "Demo"}</span>
+        <strong>${statusProfile.alertTitle}</strong>
+      </div>
+    </section>
+  `;
+}
+
 function renderShell() {
   const app = document.querySelector("#app");
   app.innerHTML = `
@@ -502,7 +967,7 @@ function updateActiveNav() {
 function renderCurrentPage() {
   updateActiveNav();
   const main = document.querySelector("#main");
-  main.innerHTML = `<section class="page active">${pageMap[currentPage]()}</section><div class="toast ${currentToast ? "show" : ""}">${currentToast}</div>`;
+  main.innerHTML = `${renderDemoControlBar()}<section class="page active">${pageMap[currentPage]()}</section><div class="toast ${currentToast ? "show" : ""}">${currentToast}</div>`;
   bindPageInteractions();
 }
 
@@ -900,6 +1365,27 @@ function renderCreatePet() {
 }
 
 function bindPageInteractions() {
+  const scenarioSelect = document.querySelector("[data-demo-scenario]");
+  if (scenarioSelect) {
+    scenarioSelect.addEventListener("change", () => {
+      void selectDemoScenario(scenarioSelect.value);
+    });
+  }
+
+  const reconnectButton = document.querySelector("[data-demo-reconnect]");
+  if (reconnectButton) {
+    reconnectButton.addEventListener("click", () => {
+      void initBackendDemo();
+    });
+  }
+
+  const demoPlayButton = document.querySelector("[data-demo-play]");
+  if (demoPlayButton) {
+    demoPlayButton.addEventListener("click", () => {
+      void playBackendScenario();
+    });
+  }
+
   document.querySelectorAll("[data-route-index]").forEach((node) => {
     const activate = () => {
       const index = Number(node.dataset.routeIndex || 0);
@@ -1085,8 +1571,4 @@ function syncScale() {
 
 window.addEventListener("resize", syncScale);
 renderShell();
-
-
-
-
-
+void initBackendDemo();

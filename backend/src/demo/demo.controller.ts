@@ -32,6 +32,7 @@ export class DemoController {
   ) {
     return this.playbackService.playSession(sessionId, {
       includeFirst: body?.includeFirst ?? false,
+      intervalMs: body?.intervalMs ?? 0,
     });
   }
 }
