@@ -11,6 +11,8 @@ It combines smart-collar telemetry, a backend state engine, a desktop companion 
 
 [![Watch the PawSentinel product demo](docs/assets/showcase/desktop-companion-macos.png)](docs/assets/demo/pawsentinel-product-demo.mp4)
 
+**[Open product demo video / 打开产品演示视频](docs/assets/demo/pawsentinel-product-demo.mp4)**
+
 Click the image above to open the product demo video.
 点击上方图片可查看 PawSentinel 产品演示视频。
 
