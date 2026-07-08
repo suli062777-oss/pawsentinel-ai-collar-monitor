@@ -1,7 +1,9 @@
-# PawRoom 后端架构与二创仓库选择计划
+# PawSentinel Cloud & State Engine 后端架构白皮书 v1.0
 
-版本：v0.1  
-日期：2026-07-07  
+版本：v1.0
+日期：2026-07-08
+文档类型：系统架构说明 / 技术白皮书
+提交状态：可展示版本
 关联文档：
 
 - `docs/pawroom-ai-pet-collar-platform-prd-v0.4.md`
@@ -16,9 +18,26 @@
 
 ---
 
-## 1. 总结
+## 1. 架构定位
 
-PawRoom 后端第一版按 **MVP + 两周验证** 设计。它的目标不是一开始做商业化完整后端，而是稳定支撑 Web 原型、全流程 Demo 和后续真实硬件/AI 接入验证。
+PawSentinel Cloud & State Engine 是整套产品的“状态理解中枢”。它接收 Collar S1 或模拟项圈上报的遥测数据，把原始的活动、位置、电量、佩戴和生命趋势信号转换为安全等级、宠物状态、时间线事件、提醒事件和桌面动画指令。
+
+该后端不是普通 CRUD 服务，而是一个面向宠物安全看护的实时状态平台：
+
+| 能力层 | 成品职责 |
+| --- | --- |
+| Telemetry Ingestion | 接收智能项圈、Mock Collar Simulator 或第三方设备适配器数据 |
+| Pet State Engine | 将原始遥测转化为 `safe / watch / attention` 安全状态 |
+| Realtime Gateway | 通过 Socket.IO 驱动桌面宠物小世界实时变化 |
+| Timeline Service | 记录今日活动、提醒、区域变化和用户补充事件 |
+| Creation Studio | 处理宠物分身、记忆卡、表情包等低频 AI 创作任务 |
+| Credits Ledger | 追踪 AI 创作额度、预估消耗、扣费和失败回滚 |
+
+当前仓库实现的是可演示的软件 MVP：默认使用 memory mode 和 Mock Collar Simulator，保证无需 Docker、PostgreSQL 或 Redis 也能完整跑通演示链路；同时通过 Prisma、BullMQ、MQTT Adapter Stub 和模块化边界保留正式硬件接入能力。
+
+## 2. 总结
+
+PawSentinel 后端第一版按 **MVP + 两周验证** 设计。它的目标不是一开始做商业化完整后端，而是稳定支撑 Web 原型、全流程 Demo 和后续真实硬件/AI 接入验证。
 
 默认技术决策：
 
@@ -31,13 +50,13 @@ PawRoom 后端第一版按 **MVP + 两周验证** 设计。它的目标不是一
 
 核心原则：
 
-> 高频看护不用大模型，低频创作用 AI。项圈数据先变成状态，再驱动桌宠动作；AI 只负责宠物分身、记忆创作和低频表达润色。
+> 高频看护不用大模型，低频创作用 AI。项圈数据先变成状态，再驱动桌面宠物分身动作；AI 只负责宠物分身、记忆创作和低频表达润色。
 
 ---
 
-## 2. 后端边界
+## 3. 后端边界
 
-### 2.1 MVP 后端要解决什么
+### 3.1 MVP 后端要解决什么
 
 MVP 后端只解决 5 件事：
 
@@ -47,7 +66,7 @@ MVP 后端只解决 5 件事：
 4. 通过 WebSocket 把状态实时推送给桌面小世界。
 5. 模拟 Paw Credits 和记忆工坊的单次 AI 创作流程。
 
-### 2.2 MVP 暂不解决什么
+### 3.2 MVP 暂不解决什么
 
 第一版明确不做：
 
@@ -63,7 +82,7 @@ MVP 后端只解决 5 件事：
 
 ---
 
-## 3. 架构总览
+## 4. 架构总览
 
 后端采用模块化单体，不拆微服务。
 
@@ -116,7 +135,7 @@ Mock/真实项圈数据
 
 ---
 
-## 4. 模块设计
+## 5. 模块设计
 
 | 模块 | 责任 | MVP 做法 | 后续升级 |
 | --- | --- | --- | --- |
@@ -125,7 +144,7 @@ Mock/真实项圈数据
 | `CollarDevice` | 项圈设备、电量、连接状态 | 使用 `collar_demo_001` | 接入真实设备绑定、固件版本、保修状态 |
 | `TelemetryIngestion` | 接收项圈原始数据 | 读取 Mock 剧本或接收 REST telemetry | 接 MQTT、第三方项圈 API、批量导入 |
 | `PetStateEngine` | 原始数据转状态 | 规则引擎，不调用大模型 | 加入个体基线、轻量模型、异常置信度 |
-| `RoomScene` | 输出桌宠动画指令 | 输出 `animationKey`、`zoneId`、`bubbleText` | 加入多房间、小游戏、桌面端小窗 |
+| `RoomScene` | 输出桌面宠物分身动画指令 | 输出 `animationKey`、`zoneId`、`bubbleText` | 加入多房间、小游戏、桌面端小窗 |
 | `Timeline` | 今日历程和事件 | 记录设备事件、用户补充、AI 演绎 | 支持周报、筛选、导出 |
 | `RealtimeGateway` | 实时推送 | Socket.IO 推送状态和动画事件 | 支持桌面端、移动端、离线重连 |
 | `CreationStudio` | 记忆工坊 | 模板生成单次创作结果 | 接 ComfyUI 或其他图像/视频生成服务 |
@@ -134,7 +153,7 @@ Mock/真实项圈数据
 
 ---
 
-## 5. 核心接口契约
+## 6. 核心接口契约
 
 ### 5.1 REST API
 
@@ -150,7 +169,7 @@ Mock/真实项圈数据
 | `POST` | `/devices/:deviceId/telemetry` | 接收项圈样本 | 状态快照和事件 |
 | `GET` | `/pets/:petId/state/latest` | 获取最新宠物状态 | `PetStateSnapshot` |
 | `GET` | `/pets/:petId/timeline` | 获取今日历程 | 设备记录、用户补充、AI 演绎 |
-| `POST` | `/interactions` | 记录桌宠互动 | 互动反馈和可选时间线事件 |
+| `POST` | `/interactions` | 记录桌面宠物分身互动 | 互动反馈和可选时间线事件 |
 | `POST` | `/creations/estimate` | 估算记忆工坊消耗 | `creditCost` |
 | `POST` | `/creations` | 创建单次创作任务 | `CreationJob` |
 | `GET` | `/creations/:creationId` | 获取创作结果 | job 状态和结果 URL |
@@ -163,7 +182,7 @@ Mock/真实项圈数据
 | --- | --- | --- |
 | `pet.state.updated` | Server -> Client | 宠物状态变化 |
 | `pet.alert.created` | Server -> Client | 异常或需关注提醒 |
-| `scene.animation.command` | Server -> Client | 桌宠动画指令 |
+| `scene.animation.command` | Server -> Client | 桌面宠物分身动画指令 |
 | `timeline.event.created` | Server -> Client | 今日历程新增事件 |
 | `device.status.updated` | Server -> Client | 项圈连接、电量、离线状态 |
 | `creation.job.updated` | Server -> Client | 记忆工坊任务状态 |
@@ -179,7 +198,7 @@ Mock/真实项圈数据
 
 ---
 
-## 6. 数据结构
+## 7. 数据结构
 
 ### 6.1 RawCollarSample
 
@@ -275,7 +294,7 @@ type CreditLedgerEntry = {
 
 ---
 
-## 7. PetStateEngine 规则
+## 8. PetStateEngine 规则
 
 第一版不用大模型做实时判断，只用规则。
 
@@ -297,14 +316,14 @@ type CreditLedgerEntry = {
 
 ---
 
-## 8. Mock 剧本
+## 9. Mock 剧本
 
 Mock 剧本文件：`data/pawroom-mock-collar-scenarios-v0.1.json`
 
 包含 4 套：
 
 1. `quiet_day`：安静日，证明低干扰陪伴。
-2. `active_day`：活跃日，证明桌宠动效和趣味互动。
+2. `active_day`：活跃日，证明桌面宠物分身动效和趣味互动。
 3. `waiting_day`：等主人日，证明情绪价值。
 4. `attention_day`：需关注日，证明安全看护付费理由。
 
@@ -317,9 +336,9 @@ Mock 剧本文件：`data/pawroom-mock-collar-scenarios-v0.1.json`
 
 ---
 
-## 9. 记忆工坊设计
+## 10. 记忆工坊设计
 
-原“每日自动小剧场”改为“记忆工坊 / 单次创作”。
+原“每日自动记忆演绎”改为“记忆工坊 / 单次创作”。
 
 原因：
 
@@ -342,13 +361,13 @@ Credits 原则：
 
 - 安全看护不扣 Credits。
 - 状态推送不扣 Credits。
-- 基础桌宠互动不扣 Credits。
+- 基础桌面宠物分身互动不扣 Credits。
 - 用户主动创建记忆内容才扣 Credits。
 - 生成失败必须退回 Credits。
 
 ---
 
-## 10. 可二创 GitHub 仓库选择
+## 11. 可二创 GitHub 仓库选择
 
 ### 10.1 主后端骨架
 
@@ -362,7 +381,7 @@ Credits 原则：
 
 - 不直接 fork 大模板。
 - 用 NestJS CLI 或 starter 初始化自己的 `backend/`。
-- Prisma schema 从 PawRoom 领域模型开始写，不照搬示例。
+- Prisma schema 从 PawSentinel 领域模型开始写，不照搬示例。
 
 ### 10.2 实时通信
 
@@ -408,13 +427,13 @@ Credits 原则：
 
 建议：
 
-- 不把 ComfyUI 代码合入 PawRoom 主后端。
+- 不把 ComfyUI 代码合入 PawSentinel 主后端。
 - 可把 ComfyUI 作为独立 AI Worker 或内部创作工具。
-- PawRoom 主后端只通过 `AiCreationProvider` 抽象调用外部服务。
+- PawSentinel 主后端只通过 `AiCreationProvider` 抽象调用外部服务。
 
 ---
 
-## 11. 制作流程
+## 12. 制作流程
 
 ### 阶段 1：契约和 Mock 数据
 
@@ -503,7 +522,7 @@ Credits 原则：
 
 ---
 
-## 12. 测试计划
+## 13. 测试计划
 
 必须覆盖：
 
@@ -516,7 +535,7 @@ Credits 原则：
 
 ---
 
-## 13. 交付顺序建议
+## 14. 交付顺序建议
 
 如果立刻开后端工程，建议按这个顺序：
 
@@ -534,7 +553,7 @@ Credits 原则：
 第一天后端目标：
 
 - 前端能拿到剧本和最新状态。
-- 桌宠能根据状态动起来。
+- 桌面宠物分身能根据状态动起来。
 
 第二天后端目标：
 
@@ -543,7 +562,7 @@ Credits 原则：
 
 ---
 
-## 14. 风险与决策
+## 15. 风险与决策
 
 | 风险 | 处理方式 |
 | --- | --- |
@@ -557,11 +576,11 @@ Credits 原则：
 
 ---
 
-## 15. 最终判断
+## 16. 最终判断
 
-PawRoom 后端第一版不应该被设计成“大而全的 IoT + AI 平台”。它应该是一个稳定的产品验证后端：
+PawSentinel 后端第一版不应该被设计成“大而全的 IoT + AI 平台”。它应该是一个稳定的产品验证后端：
 
-- 用 Mock 数据证明项圈数据可以驱动桌宠。
+- 用 Mock 数据证明项圈数据可以驱动桌面宠物分身。
 - 用规则引擎证明状态理解不依赖高频大模型。
 - 用 WebSocket 证明上班时桌面小世界可以实时变化。
 - 用记忆工坊证明 AI 创作适合作为低频增值能力。

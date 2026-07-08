@@ -68,9 +68,8 @@ docs/assets/demo/pawsentinel-product-demo.mp4
 
 - Final public name: `PawSentinel`
 - Repository name: `pawsentinel-ai-collar-monitor`
-- Earlier internal names: `PawRoom`, `PawGuard`
 - Public README and GitHub About should use `PawSentinel`.
-- Older design and code documents may keep `PawRoom` where renaming would create unnecessary implementation churn.
+- Historical file names with the `pawroom-` prefix may be retained for link compatibility.
 
 ## Public Positioning
 

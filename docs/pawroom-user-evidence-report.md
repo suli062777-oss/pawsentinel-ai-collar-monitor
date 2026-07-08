@@ -1,6 +1,28 @@
-# PawRoom 用户证据报告
+# PawSentinel User Evidence Report v1.0
 
 生成时间：2026-07-07T17:05:11+08:00
+整理版本：2026-07-08 提交版
+文档类型：用户证据 / 痛点验证 / 商业判断报告
+
+## 0. 证据结论摘要
+
+本报告整理 331 条公开用户和市场证据，用于验证 PawSentinel 的三个核心判断：
+
+1. 宠物独自在家时，“安全焦虑”是真实高频需求。
+2. 摄像头和传统监控虽然有用，但会带来隐私、噪音、打扰和持续观看压力。
+3. 用户愿意为宠物硬件、状态提醒、情绪价值和个性化内容付费。
+
+PawSentinel 的产品机会来自这些痛点的交汇：用户需要安全感，但不想一直盯着监控；用户愿意记录宠物，但照片和视频表达单一；用户愿意为宠物花钱，但更需要一个能持续陪伴、能解释状态、能把自家宠物变成数字分身的系统。
+
+| 证据维度 | 样本信号 | 对产品的意义 |
+| --- | --- | --- |
+| 监控隐私压力 | 130 条 | PawSentinel 应用桌面状态和分身替代持续视频观看 |
+| 安全焦虑 | 105 条 | 智能项圈和安全提醒是付费理由，不只是可爱桌宠 |
+| 情绪价值付费 | 61 条 | AI 分身、表情包、记忆卡有商业化空间 |
+| 生命趋势需求 | 39 条 | 可做非医疗趋势提醒，但必须控制边界 |
+| 老年宠/幼宠担忧 | 39 条 | 高焦虑用户更可能付费购买硬件 |
+| 设备不准 | 38 条 | 产品必须展示数据可信度，不承诺绝对精准 |
+| 愿意为硬件付费 | 34 条 | 硬件 + 基础软件捆绑是合理商业路径 |
 
 ## 结论状态
 
@@ -62,7 +84,7 @@
 - `EV-704E3E50DB` [App Store] Love this!! 01/26/2021 Lesbennett Downloaded this app for our 3 month old puppy who has to stay crated every other week. It’s really helped my peace of mind knowing he is ok when I’m not there. Turns out, my imagination was way worse tha... 来源：https://apps.apple.com/us/app/1362484782?see-all=reviews&platform=iphone#review-6916144302
 - `EV-AA477E8489` [App Store] Wish there was a mute setting 03/16/2023 Duskwitch6 This is very convenient and useful except it doesn’t respect my phone’s mute and is pretty loud so I can’t check on my dog when I’m at work unless I want all my coworkers to hear my dog... 来源：https://apps.apple.com/us/app/1362484782?see-all=reviews&platform=iphone#review-9719208198
 
-## 对 PawRoom 的产品启发
+## 对 PawSentinel 的产品启发
 
 - 强化安全看护和离家状态提醒；用桌面小世界替代持续视频监控：69 条证据关联。
 - 用桌面小世界替代持续视频监控：46 条证据关联。

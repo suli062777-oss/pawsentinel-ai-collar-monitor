@@ -4,15 +4,24 @@ This folder contains the public-facing product, technical, design, research, and
 
 本目录是 PawSentinel 项目的公开文档入口，适合评审、协作者或后续开发者快速理解产品机会、软硬件方案、MVP 实现和验证材料。项目中的宠物分身来自用户上传的自家宠物照片、声音或素材图，再通过 AI 工作流转译为卡通化、像素化的专属形象。
 
-## Start Here / 快速阅读路径
+## Submission Pack / 提交资料包
 
-1. Read the product direction: `pawroom-ai-pet-collar-platform-prd-v0.4.md`
-2. Understand the hardware concept: `pawroom-collar-hardware-design-v0.1.md`
-3. Understand the backend and API contract: `pawroom-backend-architecture-and-reuse-plan-v0.1.md` and `pawroom-frontend-integration-api-v0.1.md`
-4. Review the frontend experience: `pawroom-web-prototype-ia-ux-flow-v0.1.md` and `pawroom-design-system-v0.1.md`
-5. Check market validation: `pawroom-competitor-analysis.md` and `pawroom-user-evidence-report.md`
-6. Use `assets/showcase/` for GitHub README and project presentation visuals.
-7. Use `assets/demo/pawsentinel-product-demo.mp4` for the product demo video.
+| 展示顺序 | 文档 | 评审看到的价值 |
+| --- | --- | --- |
+| 1 | [最新产品报告](./pawroom-ai-pet-collar-platform-prd-v0.4.md) | 完整说明机会判断、目标用户、产品链路、MVP 与商业模式 |
+| 2 | [硬件设计](./pawroom-collar-hardware-design-v0.1.md) | 展示 Collar S1 的器件选型、结构堆叠、固件和数据链路 |
+| 3 | [后端架构](./pawroom-backend-architecture-and-reuse-plan-v0.1.md) | 展示状态引擎、实时推送、AI 创作队列和 Credits 架构 |
+| 4 | [前端集成 API](./pawroom-frontend-integration-api-v0.1.md) | 展示前后端联调契约、REST API 和 Socket.IO 事件 |
+| 5 | [设计系统](./pawroom-design-system-v0.1.md) | 展示高端、低干扰、可信任的视觉和交互规范 |
+| 6 | [竞争对手分析](./pawroom-competitor-analysis.md) | 证明不正面重复摄像头/GPS/医疗项圈，而是做数据解释层 |
+| 7 | [用户证据报告](./pawroom-user-evidence-report.md) | 用 331 条证据支撑安全焦虑、隐私压力和付费可能性 |
+| 8 | [GitHub 项目简介](./github-project-profile.md) | 提供 About、Topics、Social Preview 和提交口径 |
+| 9 | [提交前文档成熟度审查](./pawsentinel-submission-readiness-audit.md) | 检查核心文档是否达到成熟产品展示风格 |
+
+Demo assets:
+
+- `assets/showcase/`: GitHub README and presentation visuals
+- `assets/demo/pawsentinel-product-demo.mp4`: product demo video
 
 ## Product Strategy / 产品方案
 
@@ -57,8 +66,8 @@ This folder contains the public-facing product, technical, design, research, and
 - `pawroom-30s-concept-ad-script-prompts-v0.1.md`: 30-second concept ad script and prompts
 - `pawroom-main-framework-image-to-frontend-map-v0.1.md`: image-to-frontend mapping notes
 
-## Naming Note / 命名说明
+## Repository Naming Note / 仓库命名说明
 
-The final public name is **PawSentinel**. Some early documents and code identifiers still use the prototype names `PawRoom` or `PawGuard`. They refer to the same product direction: a smart-collar based pet safety monitoring system with an interactive desktop pet world.
+The public product name is **PawSentinel**. Some repository file names keep the historical `pawroom-` prefix for link compatibility, while the submission-facing content and product positioning use PawSentinel consistently.
 
-最终公开名称统一为 **PawSentinel**。早期文档中的 PawRoom / PawGuard 是同一项目在不同阶段的原型命名。
+最终公开产品名统一为 **PawSentinel**。仓库内部分文件名保留历史 `pawroom-` 前缀是为了兼容已有链接和代码引用；提交展示时以 PawSentinel 的产品口径为准。

@@ -5,7 +5,7 @@ It combines smart-collar telemetry, a backend state engine, a desktop companion 
 
 ![PawSentinel desktop companion real device demo](docs/assets/showcase/desktop-companion-real-device.png)
 
-> 当前仓库以软件 MVP 为主，用模拟项圈数据验证“硬件采集 -> 后端理解 -> 软件展示 -> 互动反馈”的完整链路。早期文档中出现的 PawRoom 或 PawGuard 均指向同一产品方向，最终公开名称统一为 **PawSentinel**。
+> 当前仓库以软件 MVP 为主，用模拟项圈数据验证“硬件采集 -> 后端理解 -> 软件展示 -> 互动反馈”的完整链路。硬件量产、真实项圈接入和长期用户运营将作为下一阶段验证目标推进。
 
 ## Product Demo / 产品演示视频
 
@@ -175,19 +175,19 @@ node --check src/app.js
 node validate-world-assets.mjs
 ```
 
-## Documentation
+## Documents / 提交文档
 
 Start here:
 
-- [Documentation Index](docs/README.md)
-- [Latest PRD](docs/pawroom-ai-pet-collar-platform-prd-v0.4.md)
-- [Hardware Design](docs/pawroom-collar-hardware-design-v0.1.md)
-- [Backend Architecture](docs/pawroom-backend-architecture-and-reuse-plan-v0.1.md)
-- [Frontend Integration API](docs/pawroom-frontend-integration-api-v0.1.md)
-- [Design System](docs/pawroom-design-system-v0.1.md)
-- [Competitor Analysis](docs/pawroom-competitor-analysis.md)
-- [User Evidence Report](docs/pawroom-user-evidence-report.md)
-- [GitHub Project Profile](docs/github-project-profile.md)
+- [文档索引 / Documentation Index](docs/README.md)
+- [最新产品报告 / Product Report](docs/pawroom-ai-pet-collar-platform-prd-v0.4.md)
+- [硬件设计 / Collar Hardware Architecture](docs/pawroom-collar-hardware-design-v0.1.md)
+- [后端架构 / Cloud & State Engine](docs/pawroom-backend-architecture-and-reuse-plan-v0.1.md)
+- [前端集成 API / Frontend Integration API](docs/pawroom-frontend-integration-api-v0.1.md)
+- [设计系统 / Design System](docs/pawroom-design-system-v0.1.md)
+- [竞争对手分析 / Competitive Landscape](docs/pawroom-competitor-analysis.md)
+- [用户证据报告 / User Evidence Report](docs/pawroom-user-evidence-report.md)
+- [GitHub 项目简介 / GitHub Project Profile](docs/github-project-profile.md)
 
 ## Safety Boundary
 

@@ -1,6 +1,28 @@
-# PawRoom Frontend Integration API v0.1
+# PawSentinel Frontend Integration API v1.0
 
-本文档给前端原型联调用，目标是先跑通 PawRoom 的第一条主链路：
+文档类型：前端集成契约 / REST + Socket.IO API 说明
+提交状态：可展示版本
+适用对象：桌面宠物小世界、Web 原型、移动端轻提醒 Demo
+
+## 0. 接口体系摘要
+
+PawSentinel 前端不直接消费原始项圈传感器数据，而是消费后端状态引擎输出的“产品级状态”：宠物状态、安全等级、当前位置、动画指令、时间线事件、设备状态和 AI 创作任务状态。
+
+这使前端可以像渲染一个实时宠物小世界一样工作，而不是像传统监控系统那样处理复杂硬件数据。前端只需要关注：
+
+| 前端关心的对象 | 后端输出 |
+| --- | --- |
+| 宠物当前在做什么 | `PetStateSnapshot.stateKey` |
+| 是否安全 | `safetyLevel: safe / watch / attention` |
+| 在家的哪个区域 | `zoneId` 和 `confidence` |
+| 桌面宠物分身怎么动 | `scene.animation.command` |
+| 是否需要提醒用户 | `pet.alert.created` |
+| 今日发生了什么 | `timeline.event.created` |
+| AI 创作是否完成 | `creation.job.updated` |
+
+## 1. 主链路
+
+本文档给前端原型联调用，目标是跑通 PawSentinel 的第一条主链路：
 
 ```text
 创建 Demo Session
@@ -10,7 +32,7 @@
 -> 用户主动触发记忆工坊创作
 ```
 
-## 运行方式
+## 2. 运行方式
 
 默认建议前端先接 memory mode：
 
@@ -27,7 +49,7 @@ npm run start
 
 前端本阶段不用依赖真实 Postgres、Redis 或真实项圈。
 
-## 推荐联调顺序
+## 3. 推荐联调顺序
 
 1. `GET /health`
 2. `GET /demo/scenarios`
@@ -39,7 +61,7 @@ npm run start
 8. `POST /creations`
 9. `GET /credits/balance?sessionId=...`
 
-## REST API
+## 4. REST API
 
 ### Health
 
@@ -281,7 +303,7 @@ npm run start
 - WebSocket 会广播 `creation.job.updated`
 - 前端可显示“生成失败，Credits 已退回”
 
-## Socket.IO
+## 5. Socket.IO
 
 连接后先加入当前 demo session：
 
@@ -337,7 +359,7 @@ socket.emit('demo.session.join', { sessionId })
 
 用途：更新记忆工坊任务状态。
 
-## 前端映射建议
+## 6. 前端映射建议
 
 `zoneId` 到房间地图：
 
@@ -364,7 +386,7 @@ socket.emit('demo.session.join', { sessionId })
 - `long_rest_idle`: 久卧提醒
 - `low_battery_idle`: 低电量提醒
 
-## 前端最小接入代码示意
+## 7. 前端最小接入代码示意
 
 ```ts
 const apiBase = 'http://localhost:4000';
@@ -390,7 +412,7 @@ await fetch(`${apiBase}/demo/sessions/${session.sessionId}/playback`, {
 });
 ```
 
-## 当前边界
+## 8. 当前边界
 
 - 第一版不接真实项圈。
 - 第一版不做高频 AI 调用。
