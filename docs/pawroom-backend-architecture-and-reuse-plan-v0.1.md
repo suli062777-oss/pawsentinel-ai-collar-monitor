@@ -7,10 +7,10 @@
 关联文档：
 
 - `docs/pawroom-ai-pet-collar-platform-prd-v0.4.md`
-- `docs/pawroom-web-prototype-ia-ux-flow-v0.1.md`
-- `docs/pawroom-web-lowfi-ux-wireflow-v0.1.md`
-- `docs/pawroom-hifi-sample-data-and-states-v0.1.md`
-- `docs/pawroom-software-prototype-development-plan-v0.1.md`
+- `docs/archive/design-process/pawroom-web-prototype-ia-ux-flow-v0.1.md`
+- `docs/archive/design-process/pawroom-web-lowfi-ux-wireflow-v0.1.md`
+- `docs/archive/design-process/pawroom-hifi-sample-data-and-states-v0.1.md`
+- `docs/archive/product-iterations/pawroom-software-prototype-development-plan-v0.1.md`
 
 配套 Mock 数据：
 

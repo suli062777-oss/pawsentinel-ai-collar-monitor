@@ -105,8 +105,9 @@ backend/   NestJS backend for collar telemetry, state engine, realtime events, a
 frontend/  Static high-fidelity desktop pet world prototype
 data/      Shared mock collar scenarios and processed validation data
 docs/      PRD, hardware design, API docs, research, design system, and showcase assets
-scripts/   Research and evidence helper scripts
 ```
+
+Process notes and research helper scripts are kept under `docs/archive/` so the repository homepage stays focused on the final product package.
 
 ## Quick Start
 
@@ -185,6 +186,7 @@ Start here:
 - [后端架构 / Cloud & State Engine](docs/pawroom-backend-architecture-and-reuse-plan-v0.1.md)
 - [前端集成 API / Frontend Integration API](docs/pawroom-frontend-integration-api-v0.1.md)
 - [设计系统 / Design System](docs/pawroom-design-system-v0.1.md)
+- [宠物分身 AI 工作流 / Pixel Avatar Kit](docs/pawroom-pixel-avatar-kit-architecture-v0.1.md)
 - [竞争对手分析 / Competitive Landscape](docs/pawroom-competitor-analysis.md)
 - [用户证据报告 / User Evidence Report](docs/pawroom-user-evidence-report.md)
 - [GitHub 项目简介 / GitHub Project Profile](docs/github-project-profile.md)

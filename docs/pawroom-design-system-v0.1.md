@@ -4,12 +4,12 @@
 文档类型：品牌体验规范 / 产品设计系统
 提交状态：可展示版本
 适用范围：PawSentinel Web 平台、桌面宠物小世界、移动端轻提醒、AI 记忆工坊
-IP 形象/宠物角色视觉规范另见：`docs/pawroom-ip-component-library-prompts-v0.1.md`
+IP 形象/宠物角色视觉过程稿已归档：`docs/archive/media-prompts/pawroom-ip-component-library-prompts-v0.1.md`
 关联输入：
 
 - 信息架构：`docs/assets/pawroom-web-ia-map-v0.2.png`
 - 低保真页面组：用户二次编辑后的左侧任务栏版本
-- IP 组件库：`docs/pawroom-ip-component-library-prompts-v0.1.md`
+- IP 组件库过程稿：`docs/archive/media-prompts/pawroom-ip-component-library-prompts-v0.1.md`
 - 颜色参考：附件图三，主色倾向为奶油黄、近白、暖橙、少量绿色和灰褐
 - 设计方向：Apple-inspired Liquid Glass，不直接复制 Apple 品牌资产
 
@@ -657,4 +657,4 @@ AI 演绎不得直接显示为事实。
   https://www.apple.com/newsroom/2025/06/apple-introduces-a-delightful-and-elegant-new-software-design/
 - Apple Human Interface Guidelines  
   https://developer.apple.com/design/human-interface-guidelines/
-- PawSentinel 信息架构图与理论审查：`docs/pawroom-web-ia-theory-audit-v0.1.md`
+- PawSentinel 信息架构图与理论审查过程稿：`docs/archive/design-process/pawroom-web-ia-theory-audit-v0.1.md`
